@@ -1,6 +1,5 @@
 <?php
-
-error_reporting(E_ALL|E_STRICT);
+error_reporting(E_ALL);
 ini_set('display_errors', 1);
 date_default_timezone_set('CET');
 
@@ -43,6 +42,14 @@ function autoloader($className) {
 
 // activates the autoloader
 spl_autoload_register('autoloader');
+
+// ⚠️ Asegurarnos de que la ruta NO tenga /index.php en el medio
+if (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
+  
+$_SERVER['REQUEST_URI'] = str_replace('/index.php', '', $_SERVER['REQUEST_URI']);
+}
+
+
 
 $router = new Router();
 $router->execute($routes);

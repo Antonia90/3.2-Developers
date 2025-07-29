@@ -10,5 +10,7 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/test' => 'test#index'
+	'/'=>'tag#gestionar',
+	'/tag/gestionar'=>'tag#gestionar'
+	//'/test' => 'test#index', -> desbloquear para hacer testing
 );
