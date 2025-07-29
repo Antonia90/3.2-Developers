@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar tarea</title>
+</head>
+<body>
+    <h1>Editar tarea #<?= $this->task->idTask ?></h1>
+    <form method="post" action="/update?id=<?= $this->task->idTask ?>">
+        <label>Descripción:
+            <input type="text" name="descriptionTask" value="<?= htmlspecialchars($this->task->descriptionTask) ?>" required>
+        </label><br><br>
+
+        <label>Usuario:
+            <input type="text" name="userTask" value="<?= htmlspecialchars($this->task->userTask) ?>" required>
+        </label><br><br>
+
+        <label>Tipo de tarea:
+            <select name="taskTipe">
+                <?php foreach (TaskTipe::cases() as $tipo): ?>
+                    <option value="<?= $tipo->value ?>" <?= $tipo === $this->task->taskTipe ? 'selected' : '' ?>>
+                        <?= ucfirst($tipo->value) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label><br><br>
+
+        <label>Fecha:
+            <input type="date" name="dateTask" value="<?= $this->task->dateTask->format('Y-m-d') ?>" required>
+        </label><br><br>
+
+        <label>Estado:
+            <select name="taskStatus">
+                <?php foreach (TaskStatus::cases() as $estado): ?>
+                    <option value="<?= $estado->value ?>" <?= $estado === $this->task->taskStatus ? 'selected' : '' ?>>
+                        <?= ucfirst($estado->value) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </label><br><br>
+
+        <button type="submit">💾 Guardar cambios</button>
+        <a href="/index">⬅ Cancelar</a>
+    </form>
+</body>
+</html>

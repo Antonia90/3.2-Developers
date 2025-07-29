@@ -10,5 +10,14 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/test' => 'test#index'
+	'/test' => 'test#index',
+
+	//tasks routes
+	'/index'     => 'task#index',       // Mostrar todas las tareas
+    '/view'      => 'task#taskView',        // Ver detalle de una tarea (requiere ?id=)
+    '/create'    => 'task#create',      // Formulario + creación de tarea
+    '/edit'      => 'task#edit',        // Formulario de edición (requiere ?id=)
+    '/update'    => 'task#update',      // Guardar edición (requiere ?id=)
+    '/delete'    => 'task#delete',      // Eliminar tarea (requiere ?id=)
+	
 );
