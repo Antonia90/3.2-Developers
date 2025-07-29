@@ -1,0 +1,28 @@
+
+   <?php $this->title = "Eliminar"; ?>
+   <div class="bg-white rounded-lg shadow-md p-6 max-w-md w-full text-center mx-auto mt-16">
+      <h2 class="text-2xl font-bold mb-4">¿Seguro que quieres eliminar tu cuenta?</h2>
+
+      <form method="POST" action="<?= BASE_URL ?>/delete" class="space-y-4">
+        <button
+          type="submit"
+          class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition"
+        >
+          Eliminar mi cuenta definitivamente
+        </button>
+
+        <a
+          href="<?= BASE_URL ?>/userView"
+          class="inline-block w-full text-gray-600 hover:underline text-sm"
+        >
+          Cancelar
+        </a>
+      </form>
+
+      <?php if (isset($this) && isset($this->error)) : ?>
+        <div class="mt-4 p-3 bg-red-100 text-red-700 rounded text-sm">
+          <?= htmlspecialchars($this->error) ?>
+        </div>
+      <?php endif; ?>
+    </div>
+

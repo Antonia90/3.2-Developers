@@ -1,0 +1,80 @@
+<?php $this->title = "Editar"; ?>
+    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6 mx-auto mt-16">
+      <h1 class="text-2xl font-bold mb-6 text-center">Actualizar mis datos</h1>
+
+      <?php
+      if (isset($this) && method_exists($this, '__get')) {
+          $errors = $this->__get('errors') ?? [];
+          $success = $this->__get('success') ?? '';
+          $error = $this->__get('error') ?? '';
+      } else {
+          $errors = $success = $error = '';
+      }
+
+      if (!empty($errors)) {
+          echo "<div class='mb-4 p-4 bg-red-100 text-red-700 rounded'><ul class='list-disc pl-5'>";
+          foreach ($errors as $e) {
+              echo "<li>" . htmlspecialchars($e) . "</li>";
+          }
+          echo "</ul></div>";
+      }
+
+      if ($error) {
+          echo "<div class='mb-4 p-4 bg-red-100 text-red-700 rounded'>" . htmlspecialchars($error) . "</div>";
+      }
+
+      if ($success) {
+          echo "<div class='mb-4 p-4 bg-green-100 text-green-700 rounded'>" . htmlspecialchars($success) . "</div>";
+      }
+
+      $user = $this->__get('user') ?? ['fullname' => '', 'username' => '', 'email' => ''];
+      ?>
+
+      <form method="POST" action="<?= BASE_URL ?>/update" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium">Nombre completo</label>
+          <input
+            type="text"
+            name="fullname"
+            required
+            value="<?= htmlspecialchars($user['fullname'] ?? '') ?>"
+            class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium">Nombre de usuario</label>
+          <input
+            type="text"
+            name="username"
+            required
+            value="<?= htmlspecialchars($user['username'] ?? '') ?>"
+            class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium">Email</label>
+          <input
+            type="email"
+            name="email"
+            required
+            value="<?= htmlspecialchars($user['email'] ?? '') ?>"
+            class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div class="pt-2">
+          <button
+            type="submit"
+            class="w-full bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700 transition"
+          >
+            Actualizar
+          </button>
+        </div>
+      </form>
+
+      <p class="mt-6 text-center text-sm">
+        <a href="<?= BASE_URL ?>/userView" class="text-yellow-600 hover:underline">Volver a perfil</a>
+      </p>
+    </div>
