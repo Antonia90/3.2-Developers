@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * Used to define the routes in the system.
@@ -12,6 +12,7 @@
 $routes = array(
 	'/test' => 'test#index',
 
+
 	//tasks routes
 	'/index'     => 'task#index',       // Mostrar todas las tareas
     '/view'      => 'task#taskView',        // Ver detalle de una tarea (requiere ?id=)
@@ -20,4 +21,20 @@ $routes = array(
     '/taskUpdate'    => 'task#update',      // Guardar edición (requiere ?id=)
     '/taskDelete'    => 'task#delete',      // Eliminar tarea (requiere ?id=)
 	
+
+	
+	//Rutas de user
+	
+	'/' => 'user#index',
+	'/signup' => 'user#signup',
+	'/login' => 'user#login',
+	'/userView' => 'user#userView',
+	'/logout' => 'user#logout',
+	'/update' => 'user#update',
+	'/logoutSuccess' => 'user#logoutSuccess',
+	'/delete' => 'user#delete'
+
+
+
+
 );

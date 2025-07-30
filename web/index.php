@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(E_ALL|E_STRICT);
+error_reporting(E_ALL);
 ini_set('display_errors', 1);
 date_default_timezone_set('CET');
 
@@ -13,6 +13,8 @@ define('CMS_PATH', ROOT_PATH . '/lib/base/');
 
 // starts the session
 session_start();
+
+require_once __DIR__ . '/../config/constants.php';
 
 // includes the system routes. Define your own routes in this file
 include(ROOT_PATH . '/config/routes.php');

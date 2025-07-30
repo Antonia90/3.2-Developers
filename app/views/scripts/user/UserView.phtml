@@ -1,0 +1,37 @@
+<div class="flex min-h-screen">
+    <!-- Panel lateral del usuario -->
+    <aside class="w-full max-w-sm bg-white shadow-md p-6 md:rounded-r-lg mt-8">
+        <h1 class="text-2xl font-bold mb-4">
+            Hola <?= htmlspecialchars($this->user['fullname']) ?>!
+        </h1>
+
+        <div class="space-y-2 text-sm">
+            <p><strong>Usuario:</strong> <?= htmlspecialchars($this->user['username']) ?></p>
+            <p><strong>Email:</strong> <?= htmlspecialchars($this->user['email']) ?></p>
+        </div>
+        <div>
+
+        </div>
+        <div class="mt-6 space-y-3 text-sm">
+            <a
+                href="<?= BASE_URL ?>/update"
+                class="inline-block text-gray-600 hover:underline">Editar mis datos</a>
+            <br />
+            <a
+                href="<?= BASE_URL ?>/logout"
+                class="inline-block text-gray-600 hover:underline">Cerrar sesión</a>
+            <br />
+            <a
+                href="<?= BASE_URL ?>/delete"
+                class="inline-block text-red-600 hover:underline">Eliminar mi cuenta</a>
+        </div>
+    </aside>
+
+    <!-- Contenido principal (ej. tareas futuras) -->
+    <main class="flex-grow p-6">
+        <div class="text-center text-gray-400 italic mt-12">
+            <!-- Placeholder para las tareas u otro contenido -->
+            <p>Aquí aparecerán tus tareas...</p>
+        </div>
+    </main>
+</div>
