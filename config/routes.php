@@ -12,7 +12,7 @@
 $routes = array(
 
 	//'/'=>'tag#gestionar',
-	'/tag/gestionar'=>'tag#gestionar'
+	'/tag/gestionar'=>'tag#gestionar',
 	//'/test' => 'test#index', -> desbloquear para hacer testing
 	'/test' => 'test#index',
 
