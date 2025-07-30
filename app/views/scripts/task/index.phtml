@@ -31,7 +31,7 @@
                 <td>
                     <a href="/view?id=<?= $task->idTask ?>">👁 Ver</a> |
                     <a href="/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |
-                    <a href="/delete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
+                    <a href="/taskDelete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
                 </td>
             </tr>
         <?php endforeach; ?>

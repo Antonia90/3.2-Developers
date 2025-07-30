@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Editar tarea #<?= $this->task->idTask ?></h1>
-    <form method="post" action="/update?id=<?= $this->task->idTask ?>">
+    <form method="post" action="/taskUpdate?id=<?= $this->task->idTask ?>">
         <label>Descripción:
             <input type="text" name="descriptionTask" value="<?= htmlspecialchars($this->task->descriptionTask) ?>" required>
         </label><br><br>

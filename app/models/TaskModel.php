@@ -19,7 +19,7 @@
         public DateTime $dateTask;
         public TaskTipe $taskTipe;
         public TaskStatus $taskStatus;
-        const FILE_PATH = __DIR__ . "/../../data/tasks.json";
+        const FILE_PATH = __DIR__ . "/../../lib/data/tasks.json";
 
         public function __construct( array $data = []) {
             $this->idTask = $data["idTask"];
