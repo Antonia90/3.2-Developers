@@ -1,0 +1,77 @@
+
+<?php $this->title = "Registro"; ?>
+
+
+<div class="w-full max-w-md bg-white rounded-lg shadow-md p-6 min-h-[60vh] mt-16 flex flex-col justify-center mx-auto">
+    <h1 class="text-2xl font-bold mb-6 text-center">Nuevo usuario</h1>
+
+    <?php
+    if (isset($this) && method_exists($this, '__get')) {
+        $errores = $this->__get('errors') ?? [];
+
+        if (!empty($errores)) {
+            echo "<div class='mb-4 p-4 bg-red-100 text-red-700 rounded'><ul class='list-disc pl-5'>";
+            foreach ($errores as $e) {
+                echo "<li>" . htmlspecialchars($e) . "</li>";
+            }
+            echo "</ul></div>";
+        }
+    } else {
+        echo "<p class='mb-4 text-sm text-gray-500'>No hay acceso a \$this->errors</p>";
+    }
+    ?>
+
+    <form method="POST" action="<?= BASE_URL ?>/signup" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium">Nombre completo</label>
+            <input
+                type="text"
+                name="fullname"
+                required
+                value="<?= htmlspecialchars($_POST['fullname'] ?? '') ?>"
+                class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium">Nombre de usuario</label>
+            <input
+                type="text"
+                name="username"
+                required
+                value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
+                class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium">Email</label>
+            <input
+                type="email"
+                name="email"
+                required
+                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium">Contraseña</label>
+            <input
+                type="password"
+                name="password"
+                required
+                class="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div class="pt-2">
+            <button
+                type="submit"
+                class="w-full bg-yellow-600 text-white py-2 px-4 rounded hover:bg-yellow-700 transition">
+                Registrarse
+            </button>
+        </div>
+    </form>
+
+    <p class="mt-6 text-center text-sm">
+        ¿Ya tienes cuenta?
+        <a href="<?= BASE_URL ?>/login" class="text-yellow-600 hover:underline">Iniciar sesión</a>
+    </p>
+</div>

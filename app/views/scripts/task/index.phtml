@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de tareas</title>
+</head>
+<body>
+    <h1>Listado de tareas</h1>
+    <a href="/create">➕ Nueva tarea</a>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Usuario</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($this->tasks as $task): ?>
+            <tr>
+                <td><?= $task->idTask ?></td>
+                <td><?= htmlspecialchars($task->descriptionTask) ?></td>
+                <td><?= htmlspecialchars($task->userTask) ?></td>
+                <td><?= $task->taskTipe->value ?></td>
+                <td><?= $task->dateTask->format('Y-m-d') ?></td>
+                <td><?= $task->taskStatus->value ?></td>
+                <td>
+                    <a href="/view?id=<?= $task->idTask ?>">👁 Ver</a> |
+                    <a href="/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |
+                    <a href="/taskDelete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</body>
+</html>

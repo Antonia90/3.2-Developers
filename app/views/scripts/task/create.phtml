@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create</title>
+</head>
+<body>
+    <h2>Crear nueva tarea</h2>
+
+<form method="POST" action="/create">
+    <label for="descriptionTask">Descripción:</label><br>
+    <input type="text" name="descriptionTask" id="descriptionTask" required><br><br>
+
+    <label for="userTask">Usuario:</label><br>
+    <input type="text" name="userTask" id="userTask" required><br><br>
+
+    <label for="taskTipe">Tipo:</label><br>
+    <select name="taskTipe" id="taskTipe" required>
+        <option value="reunion">Reunion</option>
+        <option value="revision">Revision de codigo</option>
+        <option value="desarrollo">Desarrollo</option>
+        <option value="formacion">Formacion</option>
+    </select><br><br>
+
+    <label for="dateTask">Fecha:</label><br>
+    <input type="date" name="dateTask" id="dateTask" required><br><br>
+
+    <label for="taskStatus">Estado:</label><br>
+    <select name="taskStatus" id="taskStatus" required>
+        <option value="pendiente">Pendiente</option>
+        <option value="empezada">Empezada</option>
+        <option value="acabada">Acabada</option>
+    </select><br><br>
+
+    <button type="submit">Guardar tarea</button>
+</form>
+</body>
+</html>
