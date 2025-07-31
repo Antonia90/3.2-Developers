@@ -54,5 +54,12 @@
         "username": "nani",
         "email": "nana@user.com",
         "password": "$2y$10$xBvwqBUbSvr0GDsTjAZ8VugQFq9tFG.gEKMX3KEJPl6P8wYzldSX2"
+    },
+    {
+        "id": "688b3a96188f9",
+        "fullname": "qqq",
+        "username": "eqq",
+        "email": "aaaaaaa@ccc.com",
+        "password": "$2y$10$dlMW4pmailWAPTW1q5VbXeLAdWkfQKt9EFB2ooSUM.xGy.Sjvfx7W"
     }
 ]

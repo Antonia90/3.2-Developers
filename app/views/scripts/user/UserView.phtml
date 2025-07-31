@@ -31,7 +31,38 @@
     <main class="flex-grow p-6">
         <div class="text-center text-gray-400 italic mt-12">
             <!-- Placeholder para las tareas u otro contenido -->
-            <p>Aquí aparecerán tus tareas...</p>
+                <h1>Listado de tareas</h1>
+    <a href=" <?= BASE_URL ?>/create">➕ Nueva tarea</a>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Descripción</th>
+                <th>Usuario</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($this->tasks as $task): ?>
+            <tr>
+                <td><?= $task->idTask ?></td>
+                <td><?= htmlspecialchars($task->descriptionTask) ?></td>
+                <td><?= htmlspecialchars($task->userTask) ?></td>
+                <td><?= $task->taskTipe->value ?></td>
+                <td><?= $task->dateTask->format('Y-m-d') ?></td>
+                <td><?= $task->taskStatus->value ?></td>
+                <td>
+                    <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>">👁 Ver</a> |
+                    <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |
+                    <a href="<?= BASE_URL ?>/taskDelete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
         </div>
     </main>
 </div>
