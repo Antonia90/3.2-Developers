@@ -42,7 +42,7 @@ class TagController extends ApplicationController
         }
         $this->view->etiquetas = $etiquetas;
         $this->view->settings->title = 'Gestión de Etiquetas';
-        $this->view->render('tag/TagView.phtml'); // no incluir layouts manualmente
+        $this->view->render('tag/TagView.phtml');
         exit;
     }
 }

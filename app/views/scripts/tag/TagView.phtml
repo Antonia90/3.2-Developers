@@ -14,6 +14,9 @@ if (!function_exists('obtenerEstiloHashtag')) {
 ?>
 
 <section class="bg-gray-100 p-8">
+    <a href="<?= BASE_URL ?>/userView" class="inline-block mb-6 text-blue-600 hover:underline font-medium">
+  ⬅️ Volver a tareas
+</a>
   <h1 class="text-2xl font-bold mb-6 mt-4 flex items-center gap-2">
     🗂️ Gestión de Etiquetas
   </h1>
@@ -27,7 +30,7 @@ if (!function_exists('obtenerEstiloHashtag')) {
 
   <!-- LISTA DE ETIQUETAS -->
   <ul class="space-y-4">
-    <?php foreach ($etiquetas as $e): ?>
+    <?php foreach ($this->etiquetas as $e): ?>
       <?php $estilo = obtenerEstiloHashtag($e['nombre']); ?>
       <li class="bg-white p-6 rounded shadow flex flex-col sm:flex-row justify-between items-center gap-4">
         <!-- Etiqueta -->

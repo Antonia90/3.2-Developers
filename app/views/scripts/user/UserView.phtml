@@ -9,60 +9,62 @@
             <p><strong>Usuario:</strong> <?= htmlspecialchars($this->user['username']) ?></p>
             <p><strong>Email:</strong> <?= htmlspecialchars($this->user['email']) ?></p>
         </div>
-        <div>
 
-        </div>
         <div class="mt-6 space-y-3 text-sm">
-            <a
-                href="<?= BASE_URL ?>/update"
-                class="inline-block text-gray-600 hover:underline">Editar mis datos</a>
-            <br />
-            <a
-                href="<?= BASE_URL ?>/logout"
-                class="inline-block text-gray-600 hover:underline">Cerrar sesión</a>
-            <br />
-            <a
-                href="<?= BASE_URL ?>/delete"
-                class="inline-block text-red-600 hover:underline">Eliminar mi cuenta</a>
+            <a href="<?= BASE_URL ?>/update" class="inline-block text-gray-600 hover:underline">Editar mis datos</a><br>
+            <a href="<?= BASE_URL ?>/logout" class="inline-block text-gray-600 hover:underline">Cerrar sesión</a><br>
+            <a href="<?= BASE_URL ?>/delete" class="inline-block text-red-600 hover:underline">Eliminar mi cuenta</a>
         </div>
     </aside>
 
-    <!-- Contenido principal (ej. tareas futuras) -->
-    <main class="flex-grow p-6">
-        <div class="text-center text-gray-400 italic mt-12">
-            <!-- Placeholder para las tareas u otro contenido -->
-                <h1>Listado de tareas</h1>
-    <a href=" <?= BASE_URL ?>/create">➕ Nueva tarea</a>
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Descripción</th>
-                <th>Usuario</th>
-                <th>Tipo</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($this->tasks as $task): ?>
-            <tr>
-                <td><?= $task->idTask ?></td>
-                <td><?= htmlspecialchars($task->descriptionTask) ?></td>
-                <td><?= htmlspecialchars($task->userTask) ?></td>
-                <td><?= $task->taskTipe->value ?></td>
-                <td><?= $task->dateTask->format('Y-m-d') ?></td>
-                <td><?= $task->taskStatus->value ?></td>
-                <td>
-                    <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>">👁 Ver</a> |
-                    <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |
-                    <a href="<?= BASE_URL ?>/taskDelete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+    <!-- Contenido principal -->
+    <main class="flex-grow p-6 bg-gray-100">
+        <div class="max-w-5xl mx-auto bg-white shadow-md rounded-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-700">📋 Listado de tareas</h1>
+    <div class="flex gap-4">
+        <a href="<?= BASE_URL ?>/tags" class="flex items-center bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 text-sm">
+            ➡️ Ir a etiquetas
+        </a>
+
+        <a href="<?= BASE_URL ?>/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">
+            ➕ Nueva tarea
+        </a>
+    </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm text-left border border-gray-200">
+                    <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
+                        <tr>
+                            <th class="px-4 py-3">ID</th>
+                            <th class="px-4 py-3">Descripción</th>
+                            <th class="px-4 py-3">Usuario</th>
+                            <th class="px-4 py-3">Tipo</th>
+                            <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Estado</th>
+                            <th class="px-4 py-3">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <?php foreach ($this->tasks as $task): ?>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-2"><?= $task->idTask ?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($task->descriptionTask) ?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($task->userTask) ?></td>
+                                <td class="px-4 py-2"><?= $task->taskTipe->value ?></td>
+                                <td class="px-4 py-2"><?= $task->dateTask->format('Y-m-d') ?></td>
+                                <td class="px-4 py-2"><?= $task->taskStatus->value ?></td>
+                                <td class="px-4 py-2 space-x-2">
+                                    <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>" class="text-blue-500 hover:underline">👁 Ver</a>
+                                    <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>" class="text-yellow-500 hover:underline">✏️ Editar</a>
+                                    <a href="<?= BASE_URL ?>/taskDelete?id=<?= $task->idTask ?>" class="text-red-500 hover:underline" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 </div>
