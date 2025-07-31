@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "idTask": 6288,
+        "descriptionTask": "4444",
+        "userTask": "4",
+        "dateTask": "2025-07-10",
+        "taskTipe": "revision",
+        "taskStatus": "pendiente"
+    }
+]

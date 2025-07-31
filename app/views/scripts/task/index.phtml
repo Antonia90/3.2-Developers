@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Listado de tareas</h1>
-    <a href="/create">➕ Nueva tarea</a>
+    <a href=" <?= BASE_URL ?>/create">➕ Nueva tarea</a>
     <table border="1" cellpadding="10">
         <thead>
             <tr>
@@ -29,9 +29,9 @@
                 <td><?= $task->dateTask->format('Y-m-d') ?></td>
                 <td><?= $task->taskStatus->value ?></td>
                 <td>
-                    <a href="/view?id=<?= $task->idTask ?>">👁 Ver</a> |
-                    <a href="/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |
-                    <a href="/taskDelete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
+                    <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>">👁 Ver</a> |
+                    <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |
+                    <a href="<?= BASE_URL ?>/taskDelete?id=<?= $task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
                 </td>
             </tr>
         <?php endforeach; ?>

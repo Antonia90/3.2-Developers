@@ -21,7 +21,7 @@
             //Guarda la tarea en el json, ver metodo saveData() en el modelo.
             $task->saveData();
             
-            header("Location: /index"); //redirecciona a listado de tareas
+            header("Location: " . BASE_URL . "/index"); //redirecciona a listado de tareas
             exit;
             }
 
@@ -63,7 +63,7 @@
             }
 
             TaskModel::deleteById((int)$id);
-            header("Location: /index");
+            header("Location: " . BASE_URL . "/index");
             exit;
         }
 
@@ -102,7 +102,7 @@
                 ];
 
                 TaskModel::updateById((int)$id, $newData);
-                header("Location: /index");
+                header("Location: " . BASE_URL . "/index");
                 exit;
             }
         }

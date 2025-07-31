@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Editar tarea #<?= $this->task->idTask ?></h1>
-    <form method="post" action="/taskUpdate?id=<?= $this->task->idTask ?>">
+    <form method="post" action="<?= BASE_URL ?>/taskUpdate?id=<?= $this->task->idTask ?>">
         <label>Descripción:
             <input type="text" name="descriptionTask" value="<?= htmlspecialchars($this->task->descriptionTask) ?>" required>
         </label><br><br>
@@ -40,7 +40,7 @@
         </label><br><br>
 
         <button type="submit">💾 Guardar cambios</button>
-        <a href="/index">⬅ Cancelar</a>
+        <a href="<?= BASE_URL ?>/index">⬅ Cancelar</a>
     </form>
 </body>
 </html>
