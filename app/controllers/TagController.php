@@ -1,4 +1,5 @@
 <?php
+require_once(ROOT_PATH . '/app/models/TagModel.php');
 class TagController
 {
     public function execute($action)
@@ -13,11 +14,7 @@ class TagController
 
     public function gestionar()
     {
-        require_once(ROOT_PATH . '/app/models/TagModel.php');
        
-
-
-
         $model = new TagModel;
         $etiquetas = $model->cargar();
 
@@ -28,7 +25,7 @@ class TagController
                 $etiquetas[] = ['id' => uniqid(), 'nombre' => $nueva];
                 $model->guardar($etiquetas);
             }
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            header('Location: ' . BASE_URL . '/tags');
             exit;
         }
 
@@ -41,7 +38,7 @@ class TagController
             }
             unset($e);
             $model->guardar($etiquetas);
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            header('Location: ' . BASE_URL . '/tags');
             exit;
         }
 
@@ -49,7 +46,7 @@ class TagController
         if (isset($_GET['eliminar'])) {
             $etiquetas = array_filter($etiquetas, fn($e) => $e['id'] !== $_GET['eliminar']);
             $model->guardar(array_values($etiquetas));
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            header('Location: ' . BASE_URL . '/tags');
             exit;
         }
 

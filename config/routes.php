@@ -11,11 +11,12 @@
  */
 $routes = array(
 
+	'/test' => 'test#index',
+	
+	//tags routes
+    '/tags' => 'tag#gestionar',
 	//'/'=>'tag#gestionar',
 	'/tag/gestionar'=>'tag#gestionar',
-	//'/test' => 'test#index', -> desbloquear para hacer testing
-	'/test' => 'test#index',
-
 
 	//tasks routes
 	'/index'     => 'task#index',       // Mostrar todas las tareas
@@ -25,10 +26,7 @@ $routes = array(
     '/taskUpdate'    => 'task#update',      // Guardar edición (requiere ?id=)
     '/taskDelete'    => 'task#delete',      // Eliminar tarea (requiere ?id=)
 	
-
-	
-	//Rutas de user
-	
+	//users routes
 	'/' => 'user#index',
 	'/signup' => 'user#signup',
 	'/login' => 'user#login',
