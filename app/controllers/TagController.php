@@ -1,20 +1,11 @@
 <?php
 require_once(ROOT_PATH . '/app/models/TagModel.php');
-class TagController
+class TagController extends ApplicationController
 {
-    public function execute($action)
-    {
-        if (method_exists($this, $action)) {
-            $this->$action();
-        } else{                       
-            throw new Exception("La acción '$action' no existe en TagController");
-            
-        }
-    }
 
-    public function gestionar()
+    public function gestionarAction()
     {
-       
+
         $model = new TagModel;
         $etiquetas = $model->cargar();
 
@@ -49,18 +40,9 @@ class TagController
             header('Location: ' . BASE_URL . '/tags');
             exit;
         }
-            ob_start();
-            include ROOT_PATH . '/app/views/scripts/tag/TagView.phtml';
-            $content = ob_get_clean();
-
-            $title = 'Gestión de Etiquetas';
-
-            include ROOT_PATH . '/app/views/layouts/layout.phtml';
-
-
-     
-
-
-
+        $this->view->etiquetas = $etiquetas;
+        $this->view->settings->title = 'Gestión de Etiquetas';
+        $this->view->render('tag/TagView.phtml'); // no incluir layouts manualmente
+        exit;
     }
 }

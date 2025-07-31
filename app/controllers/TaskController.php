@@ -21,7 +21,7 @@
             //Guarda la tarea en el json, ver metodo saveData() en el modelo.
             $task->saveData();
             
-            header("Location: " . BASE_URL . "/index"); //redirecciona a listado de tareas
+            header("Location: " . BASE_URL . "/userView"); //redirecciona a listado de tareas
             exit;
             }
 
@@ -29,10 +29,10 @@
         }
 
         public function indexAction() { //mostrara todas las tareas
-            //$tasks = TaskModel::accesAllData();
-            //$this->view->tasks = $tasks;
-            $userTasks = TaskModel::compareUser(); //nuevo
-            $this->view->tasks = $userTasks;//nuevo
+            $tasks = TaskModel::accesAllData();
+            $this->view->tasks = $tasks;
+            //$userTasks = TaskModel::compareUser(); //nuevo
+            //$this->view->tasks = $userTasks;//nuevo
 
             //var_dump($tasks);
            // include __DIR__ . '/../views/scripts/task/index.phtml';  // crear phtml
@@ -66,7 +66,7 @@
             }
 
             TaskModel::deleteById((int)$id);
-            header("Location: " . BASE_URL . "/index");
+            header("Location: " . BASE_URL . "/userView");
             exit;
         }
 
@@ -105,7 +105,7 @@
                 ];
 
                 TaskModel::updateById((int)$id, $newData);
-                header("Location: " . BASE_URL . "/index");
+                header("Location: " . BASE_URL . "/userView");
                 exit;
             }
         }

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/UserModel.php';
+require_once __DIR__ . '/../models/TaskModel.php';
 require_once __DIR__ . '/../../config/constants.php';
 
 class UserController extends ApplicationController
@@ -75,6 +76,8 @@ class UserController extends ApplicationController
         }
 
         $this->view->user = $_SESSION['user'];
+                    $tasks = TaskModel::accesAllData();
+            $this->view->tasks = $tasks;
     }
     
     public function deleteAction()
