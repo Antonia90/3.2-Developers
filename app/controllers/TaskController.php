@@ -29,8 +29,11 @@
         }
 
         public function indexAction() { //mostrara todas las tareas
-            $tasks = TaskModel::accesAllData();
-            $this->view->tasks = $tasks;
+            //$tasks = TaskModel::accesAllData();
+            //$this->view->tasks = $tasks;
+            $userTasks = TaskModel::compareUser(); //nuevo
+            $this->view->tasks = $userTasks;//nuevo
+
             //var_dump($tasks);
            // include __DIR__ . '/../views/scripts/task/index.phtml';  // crear phtml
         }
