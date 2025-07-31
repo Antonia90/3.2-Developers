@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Tag</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body class="bg-gray-100 p-8">
 <?php
 if (!function_exists('obtenerEstiloHashtag')) {
   function obtenerEstiloHashtag($nombre) {
@@ -17,45 +8,46 @@ if (!function_exists('obtenerEstiloHashtag')) {
       '#salud'    => ['color' => 'bg-pink-400 text-white',  'emoji' => '🧘‍♀️'],
       '#trabajo'  => ['color' => 'bg-gray-600 text-white',  'emoji' => '💼'],
     ];
-    return $estilos[$nombre] ?? ['color' => 'bg-gray-300 text-black', 'emoji' => '🏷️'];
+    return $estilos[$nombre] ?? ['color' => 'bg-blue-300 text-white', 'emoji' => '🏷️'];
   }
 }
 ?>
-<h1 class="text-2xl font-bold mb-4">📋 Gestión de Etiquetas</h1>
 
-<!-- FORMULARIO PARA CREAR NUEVA -->
-<form method="POST" class="mb-6 flex gap-2">
-  <input type="text" name="nueva_etiqueta" placeholder="#ejemplo"
-         class="border rounded px-3 py-2 flex-1" required>
-  <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">➕ Añadir</button>
-</form>
+<section class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold mb-6 mt-4 flex items-center gap-2">
+    🗂️ Gestión de Etiquetas
+  </h1>
 
-<!-- LISTA DE ETIQUETAS -->
-<ul class="space-y-4">
-<?php foreach ($etiquetas as $e): ?>
-  <li class="bg-white p-4 rounded shadow flex flex-col sm:flex-row justify-between items-center gap-2">
+  <!-- FORMULARIO PARA CREAR NUEVA -->
+  <form method="POST" class="mb-8 flex gap-2">
+    <input type="text" name="nueva_etiqueta" placeholder="#ejemplo"
+           class="border rounded px-3 py-2 flex-1" required>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">➕ Añadir</button>
+  </form>
 
-    <!-- Nombre de etiqueta con color y emoji -->
-    <?php $estilo = obtenerEstiloHashtag($e['nombre']); ?>
-    <span class="px-3 py-1 rounded-full text-sm font-semibold <?= $estilo['color'] ?>">
-      <?= $estilo['emoji'] ?> <?= htmlspecialchars($e['nombre']) ?>
-    </span>
+  <!-- LISTA DE ETIQUETAS -->
+  <ul class="space-y-4">
+    <?php foreach ($etiquetas as $e): ?>
+      <?php $estilo = obtenerEstiloHashtag($e['nombre']); ?>
+      <li class="bg-white p-6 rounded shadow flex flex-col sm:flex-row justify-between items-center gap-4">
+        <!-- Etiqueta -->
+        <span class="px-3 py-1 rounded-full text-sm font-semibold <?= $estilo['color'] ?>">
+          <?= $estilo['emoji'] ?> <?= htmlspecialchars($e['nombre']) ?>
+        </span>
 
-    <!-- Botón eliminar -->
-    <a href="?eliminar=<?= $e['id'] ?>" class="text-red-500 hover:underline">❌ Eliminar</a>
+        <!-- Botón eliminar -->
+        <a href="?eliminar=<?= $e['id'] ?>" class="text-red-500 hover:underline">❌ Eliminar</a>
 
-    <!-- Formulario para editar etiqueta -->
-    <form method="POST" class="flex gap-2">
-      <input type="hidden" name="editar_id" value="<?= $e['id'] ?>">
-      <input type="text" name="nuevo_nombre" value="<?= htmlspecialchars($e['nombre']) ?>"
-             class="border rounded px-2 py-1" required>
-      <button type="submit" class="bg-yellow-400 text-white px-3 py-1 rounded">✏️</button>
-    </form>
+        <!-- Formulario editar -->
+        <form method="POST" class="flex gap-2">
+          <input type="hidden" name="editar_id" value="<?= $e['id'] ?>">
+          <input type="text" name="nuevo_nombre" value="<?= htmlspecialchars($e['nombre']) ?>"
+                 class="border rounded px-2 py-1" required>
+          <button type="submit" class="bg-yellow-400 text-white px-3 py-1 rounded">✏️</button>
+        </form>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+</section>
 
-  </li>
-<?php endforeach; ?>
-</ul>
 
-</body>
-</html>
-<?php

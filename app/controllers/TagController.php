@@ -49,9 +49,18 @@ class TagController
             header('Location: ' . BASE_URL . '/tags');
             exit;
         }
+            ob_start();
+            include ROOT_PATH . '/app/views/scripts/tag/TagView.phtml';
+            $content = ob_get_clean();
 
-       // Mostrar vista
-        include(ROOT_PATH . '/app/views/scripts/tag/TagView.phtml');
+            $title = 'Gestión de Etiquetas';
+
+            include ROOT_PATH . '/app/views/layouts/layout.phtml';
+
+
+     
+
+
 
     }
 }
