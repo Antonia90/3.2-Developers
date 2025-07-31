@@ -115,5 +115,17 @@
             }
             return (int)$id;
         }
+        public static function compareUser() { //nuevo
+            $idUser = $_POST["username"];
+            $userTask = [];
+
+            $tasks = self::accesAllData();
+            foreach ($tasks as $task) {
+                if ($idUser === $task["userTask"]) {
+                    $userTask[] = $task;
+                }
+            }
+            return $userTask;
+        }
     }
 ?>
