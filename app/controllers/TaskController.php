@@ -10,7 +10,7 @@
             $dataTask = [
                 "idTask" => $id,
                 "descriptionTask" => $_POST["descriptionTask"],
-                "userTask" => $_POST["userTask"],
+                "userTask" => $_SESSION["user"] ["username"], //$_POST["userTask"],
                 "taskTipe" => $_POST["taskTipe"],
                 "dateTask" => $_POST["dateTask"],
                 "taskStatus" => $_POST["taskStatus"]

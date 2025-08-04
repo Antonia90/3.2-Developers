@@ -54,5 +54,29 @@
         "dateTask": "2025-08-03",
         "taskTipe": "reunion",
         "taskStatus": "pendiente"
+    },
+    {
+        "idTask": 7873,
+        "descriptionTask": "Hacer una prueba de una descripción más larga a ver qué pasa asi no se altera todo el style de las acciones. Un poco más para probar situaciones límites.",
+        "userTask": "cara",
+        "dateTask": "2025-08-06",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente"
+    },
+    {
+        "idTask": 4136,
+        "descriptionTask": "prueba",
+        "userTask": "cara",
+        "dateTask": "2025-08-22",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente"
+    },
+    {
+        "idTask": 7022,
+        "descriptionTask": "prueba1",
+        "userTask": "cara",
+        "dateTask": "2025-08-21",
+        "taskTipe": "desarrollo",
+        "taskStatus": "empezada"
     }
 ]

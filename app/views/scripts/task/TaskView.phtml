@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalle de tarea</title>
-</head>
-<body>
-    <h1>Detalle de la tarea</h1>
-    <ul>
-        <li><strong>ID:</strong> <?= $this->task->idTask ?></li>
-        <li><strong>Descripción:</strong> <?= htmlspecialchars($this->task->descriptionTask) ?></li>
-        <li><strong>Usuario:</strong> <?= htmlspecialchars($this->task->userTask) ?></li>
-        <li><strong>Tipo:</strong> <?= $this->task->taskTipe->value ?></li>
-        <li><strong>Fecha:</strong> <?= $this->task->dateTask->format('Y-m-d') ?></li>
-        <li><strong>Estado:</strong> <?= $this->task->taskStatus->value ?></li>
-    </ul>
-    <a href="<?= BASE_URL ?>/edit?id=<?= $this->task->idTask ?>">✏️ Editar</a> |
-    <a href="<?= BASE_URL ?>/delete?id=<?= $this->task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a> |
-    <a href="<?= BASE_URL ?>/userView">⬅ Volver al listado</a>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white shadow-md rounded-lg p-8 max-w-xl w-full mt-16 mx-auto">
+        <h1 class="text-2xl font-bold text-gray-700 mb-6 text-center">Detalle de la tarea</h1>
+        <ul class="space-y-5">
+            <li><strong>ID:</strong> <?= $this->task->idTask ?></li>
+            <li><strong>Descripción:</strong> <?= htmlspecialchars($this->task->descriptionTask) ?></li>
+            <!--<li><strong>Usuario:</strong> <?= htmlspecialchars($this->task->userTask) ?></li>-->
+            <li><strong>Tipo:</strong> <?= $this->task->taskTipe->value ?></li>
+            <li><strong>Fecha:</strong> <?= $this->task->dateTask->format('Y-m-d') ?></li>
+            <li><strong>Estado:</strong> <?= $this->task->taskStatus->value ?></li>
+        </ul>
+        <div class="flex justify-between items-center pt-4 mt-8">
+            <a href="<?= BASE_URL ?>/edit?id=<?= $this->task->idTask ?>" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow">✏️ Editar</a> |
+            <a href="<?= BASE_URL ?>/delete?id=<?= $this->task->idTask ?>" class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a> |
+            <a href="<?= BASE_URL ?>/userView" class="text-sm text-gray-600 hover:underline">⬅ Volver al listado</a>
+        </div>
+    </div>
 </body>
-</html>
