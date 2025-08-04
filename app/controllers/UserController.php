@@ -14,6 +14,7 @@ class UserController extends ApplicationController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fullname = trim($_POST['fullname'] ?? '');
             $username = trim($_POST['username'] ?? '');
+            $_SESSION['username'] = $_POST['username']; // nuevo, para que no se pierda. cambio nombre de variable de sesion 'nameUser'
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
 
@@ -76,8 +77,7 @@ class UserController extends ApplicationController
         }
 
         $this->view->user = $_SESSION['user'];
-                    $tasks = TaskModel::accesAllData();
-            $this->view->tasks = $tasks;
+        $this->view->tasks = TaskModel::compareUser(); //para que no salgan todas las tareas solo las de usuario logeado
     }
     
     public function deleteAction()
