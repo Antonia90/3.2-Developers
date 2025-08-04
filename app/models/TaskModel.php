@@ -116,16 +116,19 @@
             return (int)$id;
         }
         public static function compareUser() { //nuevo
-            $idUser = $_POST["username"];
-            $userTask = [];
+            $username = $_SESSION["user"] ["username"];
+            $userTasks = [];
 
             $tasks = self::accesAllData();
             foreach ($tasks as $task) {
-                if ($idUser === $task["userTask"]) {
+               /* if ($idUser === $task["userTask"]) {
                     $userTask[] = $task;
-                }
+                }*/
+                if ($task->userTask === $username) {
+                $userTasks[] = $task;
+        }
             }
-            return $userTask;
+            return $userTasks;
         }
     }
 ?>
