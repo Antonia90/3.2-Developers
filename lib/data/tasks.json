@@ -78,5 +78,13 @@
         "dateTask": "2025-08-21",
         "taskTipe": "desarrollo",
         "taskStatus": "empezada"
+    },
+    {
+        "idTask": 7801,
+        "descriptionTask": "999999",
+        "userTask": "rafa",
+        "dateTask": "2025-08-07",
+        "taskTipe": "desarrollo",
+        "taskStatus": "pendiente"
     }
 ]
