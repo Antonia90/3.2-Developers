@@ -81,14 +81,12 @@ class UserController extends ApplicationController
         $statusFilter = $_GET['status'] ?? null; //traemos el get de la pestaña
         $tipeFilter   = $_GET['tipe'] ?? null;
 
-        
-        $allUserTasks = TaskModel::compareUser(); //hay que ponerlo aqui para el flujo de programa
 
-        
+        $allUserTasks = TaskModel::compareUser(); //hay que ponerlo aqui para el flujo de programa
         $filteredTasks = [];
 
         foreach ($allUserTasks as $task) {
-            
+
             if ($statusFilter && $task->taskStatus->value !== $statusFilter) {
                 continue;
             }
@@ -101,9 +99,12 @@ class UserController extends ApplicationController
         }
 
         $this->view->tasks = $filteredTasks; //se mostrara el array
+        if (count($filteredTasks) === 0) {
+            $this->view->message = "No hay tareas que coincidan con los filtros.";
+        }
     }
-    
-    
+
+
     public function deleteAction()
     {
         if (!isset($_SESSION['user'])) {
@@ -129,69 +130,68 @@ class UserController extends ApplicationController
         $this->view->user = $user;
     }
 
-   public function updateAction()
-{
-    if (!isset($_SESSION['user'])) {
-        header('Location: ' . BASE_URL . '/login');
-        exit;
-    }
+    public function updateAction()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASE_URL . '/login');
+            exit;
+        }
 
-    $model = new UserModel();
-    $user = $_SESSION['user'];
+        $model = new UserModel();
+        $user = $_SESSION['user'];
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $fullname = trim($_POST['fullname'] ?? '');
-        $username = trim($_POST['username'] ?? '');
-        $email    = trim($_POST['email'] ?? '');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $fullname = trim($_POST['fullname'] ?? '');
+            $username = trim($_POST['username'] ?? '');
+            $email    = trim($_POST['email'] ?? '');
 
-        $errors = [];
+            $errors = [];
 
-        if ($fullname === '' || strlen($fullname) < 3) $errors[] = "Nombre completo inválido.";
-        if ($username === '' || strlen($username) < 3) $errors[] = "Usuario inválido.";
-        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Email inválido.";
+            if ($fullname === '' || strlen($fullname) < 3) $errors[] = "Nombre completo inválido.";
+            if ($username === '' || strlen($username) < 3) $errors[] = "Usuario inválido.";
+            if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Email inválido.";
 
 
-        $allUsers = $model->getAll();
-        foreach ($allUsers as $otherUser) {
-            if ($otherUser['id'] !== $user['id']) {
-                if (strcasecmp($otherUser['username'], $username) === 0) {
-                    $errors[] = "El nombre de usuario ya está en uso.";
-                }
-                if (strcasecmp($otherUser['email'], $email) === 0) {
-                    $errors[] = "El email ya está en uso.";
+            $allUsers = $model->getAll();
+            foreach ($allUsers as $otherUser) {
+                if ($otherUser['id'] !== $user['id']) {
+                    if (strcasecmp($otherUser['username'], $username) === 0) {
+                        $errors[] = "El nombre de usuario ya está en uso.";
+                    }
+                    if (strcasecmp($otherUser['email'], $email) === 0) {
+                        $errors[] = "El email ya está en uso.";
+                    }
                 }
             }
-        }
 
-        if (!empty($errors)) {
-            $this->view->errors = $errors;
-            $this->view->user = ['fullname' => $fullname, 'username' => $username, 'email' => $email];
-            return;
-        }
+            if (!empty($errors)) {
+                $this->view->errors = $errors;
+                $this->view->user = ['fullname' => $fullname, 'username' => $username, 'email' => $email];
+                return;
+            }
 
-        $updated = $model->updateById($user['id'], [
-            'fullname' => $fullname,
-            'username' => $username,
-            'email'    => $email
-        ]);
+            $updated = $model->updateById($user['id'], [
+                'fullname' => $fullname,
+                'username' => $username,
+                'email'    => $email
+            ]);
 
-        if ($updated) {
-            $_SESSION['user']['fullname'] = $fullname;
-            $_SESSION['user']['username'] = $username;
-            $_SESSION['user']['email'] = $email;
+            if ($updated) {
+                $_SESSION['user']['fullname'] = $fullname;
+                $_SESSION['user']['username'] = $username;
+                $_SESSION['user']['email'] = $email;
 
-            header('Location: ' . BASE_URL . '/userView');
-            exit;
+                header('Location: ' . BASE_URL . '/userView');
+                exit;
+            } else {
+                $this->view->error = "No se pudo actualizar el usuario.";
+                $this->view->user = ['fullname' => $fullname, 'username' => $username, 'email' => $email];
+                return;
+            }
         } else {
-            $this->view->error = "No se pudo actualizar el usuario.";
-            $this->view->user = ['fullname' => $fullname, 'username' => $username, 'email' => $email];
-            return;
+            $this->view->user = $user;
         }
-    } else {
-        $this->view->user = $user;
-
     }
-}
 
     public function logoutAction()
     {
@@ -201,8 +201,5 @@ class UserController extends ApplicationController
         exit;
     }
 
-    public function logoutSuccessAction()
-{
-
-}
+    public function logoutSuccessAction() {}
 }
