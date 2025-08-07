@@ -10,9 +10,10 @@
         case REVISION = "revision";
         case DESARROLLO = "desarrollo";
         case FORMACION = "formacion";
-    }*/
+    } estos enums los pondremos en un archivo aparte para tener el codigo mas limpio*/
     
     require_once __DIR__ . '/../enums/taskEnums.php'; //enums en carpeta de enums a parte.
+    require_once __DIR__ . '/../../config/constants.php';
 
     class TaskModel {
         public int $idTask;
@@ -21,7 +22,7 @@
         public DateTime $dateTask;
         public TaskTipe $taskTipe;
         public TaskStatus $taskStatus;
-       // const FILE_PATH = __DIR__ . "/../../lib/data/tasks.json";constante definida en constant.php
+       //const FILE_PATH = __DIR__ . "/../../lib/data/tasks.json"; //constante definida en constant.php
 
         public function __construct( array $data = []) {
             $this->idTask = $data["idTask"];
@@ -131,6 +132,32 @@
         }
             }
             return $userTasks;
+        }
+
+        public static function taskStatusFilter(?TaskStatus $status = null): array {
+            $userTasks = self::compareUser();
+            $userTaskStatus = [];
+            
+            foreach($userTasks as $userTask) {
+                if ($status === null || $userTask->taskStatus ===$status) {
+                    $userTaskStatus[] = $userTask;
+                }
+            }
+            return $userTaskStatus; 
+            
+        }
+
+        public static function taskTipeFilter(?TaskTipe $tipe = null):array {
+            $userTasks =self::compareUser();
+            $userTaskTipe = [];
+
+            foreach($userTasks as $userTask) {
+                if($tipe ===null || $userTask->taskTipe === $tipe){
+                    $userTaskTipe[] = $userTask;
+                }
+            }
+            return $userTaskTipe;
+
         }
     }
 ?>

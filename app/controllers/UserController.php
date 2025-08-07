@@ -1,8 +1,8 @@
 <?php
-
-require_once __DIR__ . '/../models/UserModel.php';
-require_once __DIR__ . '/../models/TaskModel.php';
 require_once __DIR__ . '/../../config/constants.php';
+require_once __DIR__ . '/../models/UserModel.php';
+
+require_once __DIR__ . '/../models/TaskModel.php';
 
 class UserController extends ApplicationController
 {
@@ -77,8 +77,32 @@ class UserController extends ApplicationController
         }
 
         $this->view->user = $_SESSION['user'];
-        $this->view->tasks = TaskModel::compareUser(); //para que no salgan todas las tareas solo las de usuario logeado
+
+        $statusFilter = $_GET['status'] ?? null; //traemos el get de la pestaña
+        $tipeFilter   = $_GET['tipe'] ?? null;
+
+        
+        $allUserTasks = TaskModel::compareUser(); //hay que ponerlo aqui para el flujo de programa
+
+        
+        $filteredTasks = [];
+
+        foreach ($allUserTasks as $task) {
+            
+            if ($statusFilter && $task->taskStatus->value !== $statusFilter) {
+                continue;
+            }
+
+            if ($tipeFilter && $task->taskTipe->value !== $tipeFilter) {
+                continue;
+            }
+
+            $filteredTasks[] = $task; // si ha pasado los dos filtros anteriores se añade al array
+        }
+
+        $this->view->tasks = $filteredTasks; //se mostrara el array
     }
+    
     
     public function deleteAction()
     {
