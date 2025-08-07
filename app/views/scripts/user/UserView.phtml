@@ -33,6 +33,35 @@
     </div>
             </div>
 
+    <form method="GET" class="flex flex-wrap gap-4 mb-6">
+                <div>
+                    <label for="status" class="block text-xs text-gray-600 mb-1">Estado</label>
+                    <select name="status" id="status" class="border rounded p-2 text-sm">
+                        <option value="">-- Todos --</option>
+                        <option value="pendiente" <?= ($_GET['status'] ?? '') === 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                        <option value="empezada" <?= ($_GET['status'] ?? '') === 'empezada' ? 'selected' : '' ?>>Empezada</option>
+                        <option value="acabada" <?= ($_GET['status'] ?? '') === 'acabada' ? 'selected' : '' ?>>Acabada</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="tipe" class="block text-xs text-gray-600 mb-1">Tipo</label>
+                    <select name="tipe" id="tipe" class="border rounded p-2 text-sm">
+                        <option value="">-- Todos --</option>
+                        <option value="reunion" <?= ($_GET['tipe'] ?? '') === 'reunion' ? 'selected' : '' ?>>reunion</option>
+                        <option value="revision" <?= ($_GET['tipe'] ?? '') === 'revision' ? 'selected' : '' ?>>revision</option>
+                        <option value="desarrollo" <?= ($_GET['tipe'] ?? '') === 'desarrollo' ? 'selected' : '' ?>>desarrollo</option>
+                        <option value="formacion" <?= ($_GET['tipe'] ?? '') === 'formaciono' ? 'selected' : '' ?>>formacion</option>
+                    </select>
+                </div>
+
+                <div class="flex items-end">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">
+                        Filtrar
+                    </button>
+                </div>
+            </form>
+
             <div class="overflow-x-auto">
                 <table class="min-w-full text-sm text-left border border-gray-200">
                     <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
