@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config/constants.php';
 require_once __DIR__ . '/../models/UserModel.php';
-
 require_once __DIR__ . '/../models/TaskModel.php';
 
 class UserController extends ApplicationController
@@ -9,12 +8,10 @@ class UserController extends ApplicationController
     public function indexAction() {}
     public function signupAction()
     {
-
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fullname = trim($_POST['fullname'] ?? '');
             $username = trim($_POST['username'] ?? '');
-            $_SESSION['username'] = $_POST['username']; // nuevo, para que no se pierda. cambio nombre de variable de sesion 'nameUser'
+            $_SESSION['username'] = $_POST['username']; // para que no se pierda. cambio nombre de variable de sesion 'nameUser'
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
 
@@ -50,7 +47,6 @@ class UserController extends ApplicationController
 
     public function loginAction()
     {
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $input = trim($_POST['emailOrUsername'] ?? '');
             $password = trim($_POST['password'] ?? '');
