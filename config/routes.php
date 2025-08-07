@@ -12,20 +12,17 @@
 $routes = array(
 
 	'/test' => 'test#index',
-	
+
 	//tags routes
-    '/tags' => 'tag#gestionar',
-	//'/'=>'tag#gestionar',
-	'/tag/gestionar'=>'tag#gestionar',
+	'/tags' => 'tag#gestionar',
 
 	//tasks routes
-	'/index'     => 'task#index',       // Mostrar todas las tareas
-    '/view'      => 'task#taskView',        // Ver detalle de una tarea (requiere ?id=)
-    '/create'    => 'task#create',      // Formulario + creación de tarea
-    '/edit'      => 'task#edit',        // Formulario de edición (requiere ?id=)
-    '/taskUpdate'    => 'task#update',      // Guardar edición (requiere ?id=)
-    '/taskDelete'    => 'task#delete',      // Eliminar tarea (requiere ?id=)
-	
+	'/view'      => 'task#taskView',
+	'/create'    => 'task#create',
+	'/edit'      => 'task#edit',
+	'/taskUpdate'    => 'task#update',
+	'/taskDelete'    => 'task#delete',
+
 	//users routes
 	'/' => 'user#index',
 	'/signup' => 'user#signup',

@@ -1,8 +1,7 @@
 <?php
 class TagModel
  {
-   private $archivo = __DIR__ . '/../../lib/data/tags.json';
-
+   private $archivo = TAG_DATA_FILE;
 
     public function cargar()
     {

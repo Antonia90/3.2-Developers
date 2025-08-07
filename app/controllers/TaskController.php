@@ -4,13 +4,13 @@
 
 
         //recoleccion de datos de create.phtml
-        public function createAction(){ //recoleccion de datos
+        public function createAction(){
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $id = rand(1000, 9999);
             $dataTask = [
                 "idTask" => $id,
                 "descriptionTask" => $_POST["descriptionTask"],
-                "userTask" => $_SESSION["user"] ["username"], //$_POST["userTask"],
+                "userTask" => $_SESSION["user"] ["username"],
                 "taskTipe" => $_POST["taskTipe"],
                 "dateTask" => $_POST["dateTask"],
                 "taskStatus" => $_POST["taskStatus"]
@@ -25,16 +25,11 @@
             exit;
             }
 
-            //include __DIR__ . '/../views/scripts/task/create.phtml';
         }
 
         public function indexAction() { //mostrara todas las tareas
-            //$tasks = TaskModel::accesAllData();
-            //$this->view->tasks = $tasks;
-            $userTasks = TaskModel::compareUser(); //nuevo
-            $this->view->tasks = $userTasks;//nuevo
-            
-           // include __DIR__ . '/../views/scripts/task/index.phtml';  // crear phtml
+            $userTasks = TaskModel::compareUser();
+            $this->view->tasks = $userTasks;
         }
 
         public function taskViewAction() {
@@ -51,8 +46,6 @@
                 echo "Tarea no encontrada";
                 return;
             }
-
-            //include __DIR__ . '/../views/scripts/task/view.phtml';
             $this->view->task = $task;
         }
         
@@ -83,7 +76,6 @@
                 }
 
             $this->view->task = $task;
-           // include __DIR__ . '/../views/scripts/task/edit.phtml';
         }   
 
         public function updateAction() {
