@@ -1,5 +1,5 @@
 <?php
-
+   
     enum TaskStatus : string {
         case PENDIENTE = "pendiente";
         case ACABADA = "acabada";
@@ -19,6 +19,8 @@
         public DateTime $dateTask;
         public TaskTipe $taskTipe;
         public TaskStatus $taskStatus;
+        public ?int $tagId = null; // nueva propiedad
+       
         const FILE_PATH = __DIR__ . "/../../lib/data/tasks.json";
 
         public function __construct( array $data = []) {
@@ -28,6 +30,8 @@
             $this->dateTask = new DateTime($data["dateTask"]);
             $this->taskTipe = TaskTipe::from($data["taskTipe"]);
             $this->taskStatus = TaskStatus::from($data["taskStatus"]);
+            $this->tagId = $data["tagId"] ?? null;
+
         }
 
         public function saveData(): void {
@@ -56,7 +60,8 @@
                     "userTask" => $task->userTask,
                     "dateTask" => $task->dateTask->format('Y-m-d'),
                     "taskTipe" => $task->taskTipe->value,
-                    "taskStatus" => $task->taskStatus->value
+                    "taskStatus" => $task->taskStatus->value,
+                    "tagId" => $task->tagId // añadido para conectarlo con etiquetas
                 ];
             }, $tasks);
 
@@ -90,6 +95,10 @@
                     if (isset($newData['taskStatus'])) {
                         $task->taskStatus = TaskStatus::from($newData['taskStatus']);
                     }
+                    if (isset($newData['tagId'])) {
+                        $task->tagId = $newData['tagId'];
+                    }
+
                 }
             }
 

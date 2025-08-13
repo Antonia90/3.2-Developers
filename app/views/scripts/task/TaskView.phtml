@@ -6,6 +6,12 @@
 </head>
 <body>
     <h1>Detalle de la tarea</h1>
+    <?php
+    $tagName = "Sin etiqueta";
+ 
+?>
+<li><strong>Etiqueta:</strong> <?= htmlspecialchars($tagName) ?></li>
+
     <ul>
         <li><strong>ID:</strong> <?= $this->task->idTask ?></li>
         <li><strong>Descripción:</strong> <?= htmlspecialchars($this->task->descriptionTask) ?></li>
