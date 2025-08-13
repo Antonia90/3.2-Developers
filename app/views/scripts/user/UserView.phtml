@@ -1,8 +1,8 @@
 <div class="flex min-h-screen">
     <!-- Panel lateral del usuario -->
-    <aside class="w-full max-w-sm bg-white shadow-md p-6 md:rounded-r-lg mt-8">
+    <aside class="w-full max-w-sm bg-white shadow-md p-6 md:rounded-r-lg mt-8 flex flex-col">
         <h1 class="text-2xl font-bold mb-4">
-            Hola <?= htmlspecialchars($this->user['fullname']) ?>!
+            ¡Hola <?= htmlspecialchars($this->user['fullname']) ?>!
         </h1>
 
         <div class="space-y-2 text-sm">
@@ -10,7 +10,7 @@
             <p><strong>Email:</strong> <?= htmlspecialchars($this->user['email']) ?></p>
         </div>
 
-        <div class="mt-6 space-y-3 text-sm">
+        <div class="mt-auto space-y-3 text-sm">
             <a href="<?= BASE_URL ?>/update" class="inline-block text-gray-600 hover:underline">Editar mis datos</a><br>
             <a href="<?= BASE_URL ?>/logout" class="inline-block text-gray-600 hover:underline">Cerrar sesión</a><br>
             <a href="<?= BASE_URL ?>/delete" class="inline-block text-red-600 hover:underline">Eliminar mi cuenta</a>
@@ -22,49 +22,80 @@
         <div class="max-w-5xl mx-auto bg-white shadow-md rounded-lg p-6">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-2xl font-bold text-gray-700">📋 Listado de tareas</h1>
-    <div class="flex gap-4">
-        <a href="<?= BASE_URL ?>/tags" class="flex items-center bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 text-sm">
-            ➡️ Ir a etiquetas
-        </a>
+                <div class="flex gap-4">
+                    <a href="<?= BASE_URL ?>/tags" class="flex items-center bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 text-sm">
+                        ➡️ Ir a etiquetas
+                    </a>
 
-        <a href="<?= BASE_URL ?>/create" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">
-            ➕ Nueva tarea
-        </a>
-    </div>
+                    <a href="<?= BASE_URL ?>/create" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm">
+                        ➕ Nueva tarea
+                    </a>
+                </div>
             </div>
+
+            <form method="GET" class="flex flex-wrap gap-4 mb-6">
+                <div>
+                    <label for="status" class="block text-xs text-gray-600 mb-1">Estado</label>
+                    <select name="status" id="status" class="border rounded p-2 text-sm">
+                        <option value="">-- Todos --</option>
+                        <option value="pendiente" <?= ($_GET['status'] ?? '') === 'pendiente' ? 'selected' : '' ?>>Pendiente</option>
+                        <option value="empezada" <?= ($_GET['status'] ?? '') === 'empezada' ? 'selected' : '' ?>>Empezada</option>
+                        <option value="acabada" <?= ($_GET['status'] ?? '') === 'acabada' ? 'selected' : '' ?>>Acabada</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="tipe" class="block text-xs text-gray-600 mb-1">Tipo</label>
+                    <select name="tipe" id="tipe" class="border rounded p-2 text-sm">
+                        <option value="">-- Todos --</option>
+                        <option value="reunion" <?= ($_GET['tipe'] ?? '') === 'reunion' ? 'selected' : '' ?>>reunion</option>
+                        <option value="revision" <?= ($_GET['tipe'] ?? '') === 'revision' ? 'selected' : '' ?>>revision</option>
+                        <option value="desarrollo" <?= ($_GET['tipe'] ?? '') === 'desarrollo' ? 'selected' : '' ?>>desarrollo</option>
+                        <option value="formacion" <?= ($_GET['tipe'] ?? '') === 'formacion' ? 'selected' : '' ?>>formacion</option>
+                    </select>
+                </div>
+
+                <div class="flex items-end">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-sm">
+                        Filtrar
+                    </button>
+                </div>
+            </form>
+
+            <div class="text-red-500 bold text-center py-4"><?= $this->message ?> </div>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full text-sm text-left border border-gray-200">
-                    <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
-                        <tr>
-                            <th class="px-4 py-3">ID</th>
-                            <th class="px-4 py-3">Descripción</th>
-                            <th class="px-4 py-3">Usuario</th>
-                            <th class="px-4 py-3">Tipo</th>
-                            <th class="px-4 py-3">Fecha</th>
-                            <th class="px-4 py-3">Estado</th>
-                            <th class="px-4 py-3">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <?php foreach ($this->tasks as $task): ?>
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2"><?= $task->idTask ?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($task->descriptionTask) ?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($task->userTask) ?></td>
-                                <td class="px-4 py-2"><?= $task->taskTipe->value ?></td>
-                                <td class="px-4 py-2"><?= $task->dateTask->format('Y-m-d') ?></td>
-                                <td class="px-4 py-2"><?= $task->taskStatus->value ?></td>
-                                <td class="px-4 py-2 space-x-2">
-                                    <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>" class="text-blue-500 hover:underline">👁 Ver</a>
-                                    <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>" class="text-yellow-500 hover:underline">✏️ Editar</a>
-                                    <a href="<?= BASE_URL ?>/taskDelete?id=<?= $task->idTask ?>" class="text-red-500 hover:underline" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
-                                </td>
+
+                    <table class="min-w-full text-sm text-left border border-gray-200">
+                        <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
+                            <tr>
+                                <!--<th class="px-4 py-3">ID</th>-->
+                                <th class="px-4 py-3">Descripción</th>
+                                <!--<th class="px-4 py-3">Usuario</th> -->
+                                <th class="px-4 py-3">Tipo</th>
+                                <th class="px-4 py-3">Fecha</th>
+                                <th class="px-4 py-3">Estado</th>
+                                <th class="px-4 py-3">Acciones</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <?php foreach ($this->tasks as $task): ?>
+                                <tr class="hover:bg-gray-50">
+                                    <!--<td class="px-4 py-2"><?= $task->idTask ?></td>-->
+                                    <td class="px-4 py-2 break-words max-w-xs"><?= htmlspecialchars(mb_strimwidth($task->descriptionTask, 0, 100, '...')) ?></td>
+                                    <!--<td class="px-4 py-2"><?= htmlspecialchars($task->userTask) ?></td>-->
+                                    <td class="px-4 py-2"><?= $task->taskTipe->value ?></td>
+                                    <td class="px-4 py-2"><?= $task->dateTask->format('Y-m-d') ?></td>
+                                    <td class="px-4 py-2"><?= $task->taskStatus->value ?></td>
+                                    <td class="px-4 py-2 space-x-2 min-w-[10rem] whitespace-nowrap">
+                                        <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>" class="text-blue-500 hover:underline">👁 Ver</a>
+                                        <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>" class="text-yellow-500 hover:underline">✏️ Editar</a>
+                                        <a href="<?= BASE_URL ?>/taskDelete?id=<?= $task->idTask ?>" class="text-red-500 hover:underline" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
             </div>
-        </div>
     </main>
 </div>

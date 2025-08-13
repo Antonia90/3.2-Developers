@@ -11,10 +11,12 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../'));
 // defines the cms path
 define('CMS_PATH', ROOT_PATH . '/lib/base/');
 
+require_once __DIR__ . '/../config/constants.php'; //cargar las constantes antes que el modelo
+
 // starts the session
 session_start();
 
-require_once __DIR__ . '/../config/constants.php';
+//require_once __DIR__ . '/../config/constants.php';
 
 // includes the system routes. Define your own routes in this file
 include(ROOT_PATH . '/config/routes.php');
@@ -45,14 +47,6 @@ function autoloader($className) {
 
 // activates the autoloader
 spl_autoload_register('autoloader');
-
-// ⚠️ Asegurarnos de que la ruta NO tenga /index.php en el medio
-if (strpos($_SERVER['REQUEST_URI'], '/index.php') !== false) {
-  
-$_SERVER['REQUEST_URI'] = str_replace('/index.php', '', $_SERVER['REQUEST_URI']);
-}
-
-
 
 $router = new Router();
 $router->execute($routes);
