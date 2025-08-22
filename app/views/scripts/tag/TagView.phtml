@@ -14,43 +14,61 @@ if (!function_exists('obtenerEstiloHashtag')) {
 ?>
 
 <section class="bg-gray-100 p-8">
-    <a href="<?= BASE_URL ?>/userView" class="inline-block mb-6 text-blue-600 hover:underline font-medium">
-  ⬅️ Volver a tareas
-</a>
+  <a href="<?= BASE_URL ?>/userView" class="inline-block mb-6 text-blue-600 hover:underline font-medium">
+    ⬅️ Volver a tareas
+  </a>
+
   <h1 class="text-2xl font-bold mb-6 mt-4 flex items-center gap-2">
     🗂️ Gestión de Etiquetas
   </h1>
 
   <!-- FORMULARIO PARA CREAR NUEVA -->
-  <form method="POST" class="mb-8 flex gap-2">
+  <form method="POST" class="mb-8 flex flex-col sm:flex-row gap-2">
     <input type="text" name="nueva_etiqueta" placeholder="#ejemplo"
            class="border rounded px-3 py-2 flex-1" required>
-    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">➕ Añadir</button>
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">
+      ➕ Añadir
+    </button>
   </form>
 
   <!-- LISTA DE ETIQUETAS -->
   <ul class="space-y-4">
     <?php foreach ($this->etiquetas as $e): ?>
-      <?php $estilo = obtenerEstiloHashtag($e['nombre']); ?>
+      <?php 
+        $nombre = $e->nombre ?? 'sin_nombre';
+        $id = $e->id ?? '';
+        $estilo = obtenerEstiloHashtag($nombre); 
+      ?>
       <li class="bg-white p-6 rounded shadow flex flex-col sm:flex-row justify-between items-center gap-4">
-        <!-- Etiqueta -->
+        
+        <!-- Etiqueta con color y emoji -->
         <span class="px-3 py-1 rounded-full text-sm font-semibold <?= $estilo['color'] ?>">
-          <?= $estilo['emoji'] ?> <?= htmlspecialchars($e['nombre']) ?>
+          <?= $estilo['emoji'] ?> <?= htmlspecialchars($nombre) ?>
         </span>
 
-        <!-- Botón eliminar -->
-        <a href="?eliminar=<?= $e['id'] ?>" class="text-red-500 hover:underline">❌ Eliminar</a>
+        <!-- Botones: Eliminar y Editar -->
+        <div class="flex items-center gap-4">
 
-        <!-- Formulario editar -->
-        <form method="POST" class="flex gap-2">
-          <input type="hidden" name="editar_id" value="<?= $e['id'] ?>">
-          <input type="text" name="nuevo_nombre" value="<?= htmlspecialchars($e['nombre']) ?>"
-                 class="border rounded px-2 py-1" required>
-          <button type="submit" class="bg-yellow-400 text-white px-3 py-1 rounded">✏️</button>
-        </form>
+          <!-- Eliminar -->
+          <a href="?eliminar=<?= htmlspecialchars($id) ?>" class="text-red-500 hover:underline">
+            ❌ Eliminar
+          </a>
+
+          <!-- Editar -->
+          <form method="POST" class="flex gap-2 items-center">
+            <input type="hidden" name="editar_id" value="<?= htmlspecialchars($id) ?>">
+            <input type="text" name="nuevo_nombre" value="<?= htmlspecialchars($nombre) ?>"
+                   class="border rounded px-2 py-1" required>
+            <button type="submit" class="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded" title="Editar">
+              ✏️
+            </button>
+          </form>
+
+        </div>
       </li>
     <?php endforeach; ?>
   </ul>
 </section>
+
 
 

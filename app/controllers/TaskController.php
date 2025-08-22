@@ -1,5 +1,7 @@
 <?php
     require_once __DIR__ . '/../models/TaskModel.php';
+    require_once __DIR__ . '/../models/TagModel.php';
+
     class TaskController extends ApplicationController {
 
 
@@ -13,24 +15,31 @@
                 "userTask" => $_POST["userTask"],
                 "taskTipe" => $_POST["taskTipe"],
                 "dateTask" => $_POST["dateTask"],
-                "taskStatus" => $_POST["taskStatus"]
+                "taskStatus" => $_POST["taskStatus"],
+                'tagId' => $_POST['tagId'] 
             ];
             //creamos el objeto de tarea con el constructor(modelo).
             $task= new TaskModel($dataTask);
 
             //Guarda la tarea en el json, ver metodo saveData() en el modelo.
             $task->saveData();
-            
+          
             header("Location: " . BASE_URL . "/userView"); //redirecciona a listado de tareas
             exit;
             }
+            $this->view->tags = TagModel::accesAllData();
 
             //include __DIR__ . '/../views/scripts/task/create.phtml';
         }
 
         public function indexAction() { //mostrara todas las tareas
-            $tasks = TaskModel::accesAllData();
-            $this->view->tasks = $tasks;
+             $tasks = TaskModel::getAllWithTags();
+             $this->view->tasks = $tasks;
+             $this->view->tags = TagModel::accesAllData();
+            
+             include __DIR__ . '/../views/scripts/user/UserView.phtml';
+
+            
             //$userTasks = TaskModel::compareUser(); //nuevo
             //$this->view->tasks = $userTasks;//nuevo
 
@@ -84,7 +93,11 @@
                 }
 
             $this->view->task = $task;
+            
+            $this->view->tags = TagModel::accesAllData();
+
            // include __DIR__ . '/../views/scripts/task/edit.phtml';
+
         }   
 
         public function updateAction() {
@@ -101,7 +114,10 @@
                     "userTask" => $_POST["userTask"],
                     "taskTipe" => $_POST["taskTipe"],
                     "dateTask" => $_POST["dateTask"],
-                    "taskStatus" => $_POST["taskStatus"]
+                    "taskStatus" => $_POST["taskStatus"],
+                    "tagId" => $_POST["tagId"] !== '' ? $_POST["tagId"] : null
+
+
                 ];
 
                 TaskModel::updateById((int)$id, $newData);

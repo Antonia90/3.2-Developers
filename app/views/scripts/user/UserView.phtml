@@ -43,6 +43,7 @@
                             <th class="px-4 py-3">Tipo</th>
                             <th class="px-4 py-3">Fecha</th>
                             <th class="px-4 py-3">Estado</th>
+                            <th class="px-4 py-3">Etiqueta</th>
                             <th class="px-4 py-3">Acciones</th>
                         </tr>
                     </thead>
@@ -55,6 +56,8 @@
                                 <td class="px-4 py-2"><?= $task->taskTipe->value ?></td>
                                 <td class="px-4 py-2"><?= $task->dateTask->format('Y-m-d') ?></td>
                                 <td class="px-4 py-2"><?= $task->taskStatus->value ?></td>
+                                <td class="px-4 py-2"><?= $task->tag ? htmlspecialchars($task->tag->nombre) : 'Sin etiqueta' ?></td>
+
                                 <td class="px-4 py-2 space-x-2">
                                     <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>" class="text-blue-500 hover:underline">👁 Ver</a>
                                     <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>" class="text-yellow-500 hover:underline">✏️ Editar</a>

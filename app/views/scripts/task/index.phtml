@@ -17,6 +17,7 @@
                 <th>Tipo</th>
                 <th>Fecha</th>
                 <th>Estado</th>
+                <th>Etiqueta</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                 <td><?= $task->taskTipe->value ?></td>
                 <td><?= $task->dateTask->format('Y-m-d') ?></td>
                 <td><?= $task->taskStatus->value ?></td>
+                <td><?= $task->tag ? htmlspecialchars($task->tag->nombre) : 'Sin etiqueta' ?></td>
                 <td>
                     <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>">👁 Ver</a> |
                     <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>">✏️ Editar</a> |

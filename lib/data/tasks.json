@@ -5,7 +5,8 @@
         "userTask": "4",
         "dateTask": "2025-07-10",
         "taskTipe": "revision",
-        "taskStatus": "pendiente"
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
     },
     {
         "idTask": 6875,
@@ -13,7 +14,8 @@
         "userTask": "333",
         "dateTask": "2025-07-11",
         "taskTipe": "reunion",
-        "taskStatus": "pendiente"
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
     },
     {
         "idTask": 1049,
@@ -21,6 +23,18 @@
         "userTask": "33",
         "dateTask": "2025-07-12",
         "taskTipe": "reunion",
-        "taskStatus": "pendiente"
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 2650,
+        "descriptionTask": "examen",
+        "userTask": "jen",
+        "dateTask": "2025-09-01",
+        "taskTipe": "formacion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
     }
+
+
 ]

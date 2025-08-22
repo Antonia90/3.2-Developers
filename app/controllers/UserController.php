@@ -76,7 +76,8 @@ class UserController extends ApplicationController
         }
 
         $this->view->user = $_SESSION['user'];
-                    $tasks = TaskModel::accesAllData();
+                    $tasks = TaskModel::getAllWithTags(); // ✅ CON etiquetas unidas
+
             $this->view->tasks = $tasks;
     }
     

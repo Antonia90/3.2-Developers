@@ -1,5 +1,5 @@
 <?php
-
+   require_once __DIR__ . "/TagModel.php";
     enum TaskStatus : string {
         case PENDIENTE = "pendiente";
         case ACABADA = "acabada";
@@ -19,7 +19,15 @@
         public DateTime $dateTask;
         public TaskTipe $taskTipe;
         public TaskStatus $taskStatus;
+
+        public ?string $tagId = null; 
+        public ?stdClass $tag = null;
+
+
         const FILE_PATH = __DIR__ . "/../../lib/data/tasks.json";
+     
+
+
 
         public function __construct( array $data = []) {
             $this->idTask = $data["idTask"];
@@ -28,13 +36,30 @@
             $this->dateTask = new DateTime($data["dateTask"]);
             $this->taskTipe = TaskTipe::from($data["taskTipe"]);
             $this->taskStatus = TaskStatus::from($data["taskStatus"]);
-        }
+            $this->tagId = $data["tagId"] ;
 
-        public function saveData(): void {
+        }
+       public function saveData(): void {
             $tasks = self::accesAllData(); //carga tareas existentes metodo allData() mas abajo
             $tasks[] = $this;   //agrega esta tarea al array
             self::saveAllData($tasks);  //guarda el array completo en el json.
         }
+       public static function saveAllData(array $tasks): void {
+         $data = array_map(function ($task) {
+            return [
+             "idTask" => $task->idTask,
+             "descriptionTask" => $task->descriptionTask,
+             "userTask" => $task->userTask,
+             "dateTask" => $task->dateTask->format('Y-m-d'),
+             "taskTipe" => $task->taskTipe->value,
+             "taskStatus" => $task->taskStatus->value,
+             "tagId" => $task->tagId  
+        ];
+    }, $tasks);
+
+    file_put_contents(self::FILE_PATH, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
 
         public static function accesAllData(): array{
             if (!file_exists(self::FILE_PATH)) {
@@ -48,20 +73,6 @@
             // fn($item) => new self($item) trasnforma un array de arrays en un array de objetos,asi cada tarea sera un objeto.
         }
 
-        public static function saveAllData(array $tasks): void {
-            $data = array_map(function ($task) {
-                return [
-                    "idTask" => $task->idTask,
-                    "descriptionTask" => $task->descriptionTask,
-                    "userTask" => $task->userTask,
-                    "dateTask" => $task->dateTask->format('Y-m-d'),
-                    "taskTipe" => $task->taskTipe->value,
-                    "taskStatus" => $task->taskStatus->value
-                ];
-            }, $tasks);
-
-        file_put_contents(self::FILE_PATH, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        }
 
         public static function deleteById(int $id): void {
             $tasks = self::accesAllData();
@@ -90,6 +101,9 @@
                     if (isset($newData['taskStatus'])) {
                         $task->taskStatus = TaskStatus::from($newData['taskStatus']);
                     }
+                    if (isset($newData['tagId'])) {
+                         $task->tagId = $newData['tagId'] !== '' ? $newData['tagId'] : null;
+        }
                 }
             }
 
@@ -115,17 +129,58 @@
             }
             return (int)$id;
         }
-        public static function compareUser() { //nuevo
+        public static function compareUser() { 
             $idUser = $_POST["username"];
             $userTask = [];
 
             $tasks = self::accesAllData();
             foreach ($tasks as $task) {
-                if ($idUser === $task["userTask"]) {
+                if ($idUser === $task->userTask) {
+
                     $userTask[] = $task;
                 }
             }
             return $userTask;
         }
+        
+
+
+        public static function getAllWithTags(): array {
+        $tasks = self::accesAllData();          // tareas normales
+        $tags = TagModel::accesAllData();       // etiquetas
+
+    // Crear mapa rápido de etiquetas por ID
+        $tagMap = [];
+         foreach ($tags as $tag) {
+          $tagMap[$tag->id] = $tag;
+
+
     }
+
+    // Asignar objeto etiqueta a cada tarea
+         foreach ($tasks as $task) {
+             if ($task->tagId && isset($tagMap[$task->tagId])) {
+                 $task->tag = $tagMap[$task->tagId]; 
+            } else {
+                 $task->tag = null;
+            }
+        }
+
+        return $tasks;
+    }
+  
+
+}
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
