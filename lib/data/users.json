@@ -22,7 +22,7 @@
     },
     {
         "id": "688609295216b",
-        "fullname": "Lalala l",
+        "fullname": "Carla Carla",
         "username": "cara",
         "email": "lalalala@user.com",
         "password": "$2y$10$UZGXLJNN2kQwbqxFKrC86.eaqFBp7M9WNzxvTeBzZ1qz8Ml9jMl3S"
@@ -62,11 +62,27 @@
         "email": "aaaaaaa@ccc.com",
         "password": "$2y$10$dlMW4pmailWAPTW1q5VbXeLAdWkfQKt9EFB2ooSUM.xGy.Sjvfx7W"
     },
-     {
+
+    {
         "id": "68a361f99a124",
         "fullname": "Jenifer",
         "username": "jen",
         "email": "jenifer@gmail.com",
         "password": "$2y$10$.ZNlJaT4gfc9w\/mfiueh8u\/yTl3Rkrr3sARarMmtOY38Be4kY7Ci6"
+    },
+    {
+        "id": "688b50842d277",
+        "fullname": "blablabla",
+        "username": "bla",
+        "email": "tututu@gmail.com",
+        "password": "$2y$10$Ple7QZwfjQZReS7vd2Yf8.b9gDsTY.e0sAvxvvA.HjrPa6J.MT5fm"
+    },
+    {
+        "id": "688e3e674ea1b",
+        "fullname": "rafa",
+        "username": "rafa",
+        "email": "aaaaaa@gmail.com",
+        "password": "$2y$10$gI4tHZxSSOFQSdOtbRufu.TdEmEf8uyjlT0UAYeF5h8Z6tFjTVzue"
+
     }
 ]

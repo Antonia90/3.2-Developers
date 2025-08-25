@@ -1,34 +1,31 @@
 <?php
+
 class TagModel {
-    private $archivo = __DIR__ . '/../../lib/data/tags.json';
+    private string $archivo = TAG_DATA_FILE;
 
-    public function cargar() {
+    public function cargar(): array {
         if (!file_exists($this->archivo)) return [];
+
         $datos = json_decode(file_get_contents($this->archivo), true) ?? [];
-         return array_map(function($tag) {
-            return (object) $tag;
-        }, $datos);
-
+        return array_map(fn($tag) => (object) $tag, $datos);
     }
 
-    public function guardar(array $etiquetas) {
-        file_put_contents($this->archivo, json_encode($etiquetas, JSON_PRETTY_PRINT));
+    public function guardar(array $etiquetas): void {
+        file_put_contents($this->archivo, json_encode($etiquetas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
     }
 
-    public function obtenerPorId($id) {
+    public function obtenerPorId(string $id): ?object {
         foreach ($this->cargar() as $e) {
-          if ($e->id === $id) return $e;  
-
+            if ($e->id === $id) return $e;
         }
         return null;
     }
 
-
-  
     public static function accesAllData(): array {
         $modelo = new self();
         return $modelo->cargar();
     }
+
 
     public static function getById($id) {
     $modelo = new self();

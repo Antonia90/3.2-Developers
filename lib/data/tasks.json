@@ -22,7 +22,7 @@
         "descriptionTask": "tt",
         "userTask": "33",
         "dateTask": "2025-07-12",
-        "taskTipe": "reunion",
+
         "taskStatus": "pendiente",
         "tagId": "68821a0e704e1"
     },
@@ -34,6 +34,92 @@
         "taskTipe": "formacion",
         "taskStatus": "pendiente",
         "tagId": "68821a0e704e1"
+
+       
+    },
+    {
+        "idTask": 5537,
+        "descriptionTask": "prueba",
+        "userTask": "bla",
+        "dateTask": "2025-08-02",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 2808,
+        "descriptionTask": "prueba",
+        "userTask": "bla",
+        "dateTask": "2025-08-09",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 3370,
+        "descriptionTask": "prueba",
+        "userTask": "rafa",
+        "dateTask": "2025-08-04",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 3518,
+        "descriptionTask": "prueba",
+        "userTask": "rafa",
+        "dateTask": "2025-08-03",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 7873,
+        "descriptionTask": "Hacer una prueba de una descripción más larga a ver qué pasa asi no se altera todo el style de las acciones. Un poco más para probar situaciones límites.",
+        "userTask": "cara",
+        "dateTask": "2025-08-06",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+
+    },
+    {
+        "idTask": 4136,
+        "descriptionTask": "prueba",
+        "userTask": "cara",
+        "dateTask": "2025-08-22",
+        "taskTipe": "reunion",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 7801,
+        "descriptionTask": "999999",
+        "userTask": "rafa",
+        "dateTask": "2025-08-07",
+        "taskTipe": "desarrollo",
+        "taskStatus": "pendiente",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 6610,
+        "descriptionTask": "prueba2",
+        "userTask": "rafa",
+        "dateTask": "2025-08-06",
+        "taskTipe": "desarrollo",
+        "taskStatus": "acabada",
+        "tagId": "68821a0e704e1"
+    },
+    {
+        "idTask": 3091,
+        "descriptionTask": "prueba",
+        "userTask": "cara",
+        "dateTask": "2025-08-29",
+        "taskTipe": "desarrollo",
+        "taskStatus": "empezada",
+        "tagId": "68821a0e704e1"
+
+
     }
 
 
