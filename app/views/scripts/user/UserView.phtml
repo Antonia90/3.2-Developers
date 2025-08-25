@@ -66,18 +66,19 @@
 
             <div class="overflow-x-auto">
 
-                    <table class="min-w-full text-sm text-left border border-gray-200">
-                        <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
-                            <tr>
-                                <!--<th class="px-4 py-3">ID</th>-->
-                                <th class="px-4 py-3">Descripción</th>
-                                <!--<th class="px-4 py-3">Usuario</th> -->
-                                <th class="px-4 py-3">Tipo</th>
-                                <th class="px-4 py-3">Fecha</th>
-                                <th class="px-4 py-3">Estado</th>
-                                <th class="px-4 py-3">Acciones</th>
-                            </tr>
-                        </thead>
+                <table class="min-w-full text-sm text-left border border-gray-200">
+                    <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
+                        <tr>
+                            <th class="px-4 py-3">ID</th>
+                            <th class="px-4 py-3">Descripción</th>
+                            <th class="px-4 py-3">Usuario</th>
+                            <th class="px-4 py-3">Tipo</th>
+                            <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Estado</th>
+                            <th class="px-4 py-3">Etiqueta</th>
+                            <th class="px-4 py-3">Acciones</th>
+                        </tr>
+                    </thead>
                         <tbody class="divide-y divide-gray-100">
                             <?php foreach ($this->tasks as $task): ?>
                                 <tr class="hover:bg-gray-50">
@@ -87,6 +88,7 @@
                                     <td class="px-4 py-2"><?= $task->taskTipe->value ?></td>
                                     <td class="px-4 py-2"><?= $task->dateTask->format('Y-m-d') ?></td>
                                     <td class="px-4 py-2"><?= $task->taskStatus->value ?></td>
+                                    <td class="px-4 py-2"><?= $task->tag ? htmlspecialchars($task->tag->nombre) : 'Sin etiqueta' ?></td>
                                     <td class="px-4 py-2 space-x-2 min-w-[10rem] whitespace-nowrap">
                                         <a href="<?= BASE_URL ?>/view?id=<?= $task->idTask ?>" class="text-blue-500 hover:underline">👁 Ver</a>
                                         <a href="<?= BASE_URL ?>/edit?id=<?= $task->idTask ?>" class="text-yellow-500 hover:underline">✏️ Editar</a>

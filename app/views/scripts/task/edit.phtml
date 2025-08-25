@@ -55,10 +55,20 @@
           <?php endforeach; ?>
         </select>
       </div>
+      <!-- Etiqueta -->
+      <select name="tagId" id="tagId" class="form-select mt-1 block w-full">
+           <option value="">-- Sin etiqueta --</option>
+          <?php foreach ($this->tags as $tag): ?>
+           <option value="<?= htmlspecialchars($tag->id) ?>" 
+            <?= isset($this->task->tag) && $this->task->tag && $this->task->tag->id === $tag->id ? 'selected' : '' ?>>
+            <?= htmlspecialchars($tag->nombre) ?>
+            </option>
+         <?php endforeach; ?>
+      </select>
 
       <!-- Botones -->
       <div class="flex justify-between items-center pt-4">
-        <a href="<?= BASE_URL ?>/userView"
+         <a href="<?= BASE_URL ?>/userView"
            class="text-sm text-gray-600 hover:underline">⬅ Cancelar</a>
         <button type="submit"
                 class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow">
