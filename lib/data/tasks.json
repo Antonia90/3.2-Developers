@@ -22,7 +22,7 @@
         "descriptionTask": "tt",
         "userTask": "33",
         "dateTask": "2025-07-12",
-
+        "taskTipe": "formacion",
         "taskStatus": "pendiente",
         "tagId": "68821a0e704e1"
     },
@@ -34,8 +34,6 @@
         "taskTipe": "formacion",
         "taskStatus": "pendiente",
         "tagId": "68821a0e704e1"
-
-       
     },
     {
         "idTask": 5537,
@@ -80,8 +78,7 @@
         "dateTask": "2025-08-06",
         "taskTipe": "reunion",
         "taskStatus": "pendiente",
-        "tagId": "68821a0e704e1"
-
+        "tagId": "688747948466c"
     },
     {
         "idTask": 4136,
@@ -118,9 +115,5 @@
         "taskTipe": "desarrollo",
         "taskStatus": "empezada",
         "tagId": "68821a0e704e1"
-
-
     }
-
-
 ]

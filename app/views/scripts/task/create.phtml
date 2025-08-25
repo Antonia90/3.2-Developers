@@ -9,23 +9,14 @@
       <div>
         <label class="block text-sm font-medium text-gray-700">Descripción</label>
         <input type="text" name="descriptionTask" required
-               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
-
-
-            <!-- Usuario 
-            <div>
-                <label for="userTask" class="block text-sm font-medium text-gray-700">Usuario</label>
-                <input type="text" name="userTask" id="userTask" required
-                    class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
-            </div>-->
-
 
       <!-- Tipo de tarea -->
       <div>
         <label class="block text-sm font-medium text-gray-700">Tipo de tarea</label>
         <select name="taskTipe"
-                class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
           <?php foreach (TaskTipe::cases() as $tipo): ?>
             <option value="<?= $tipo->value ?>"><?= ucfirst($tipo->value) ?></option>
           <?php endforeach; ?>
@@ -36,39 +27,39 @@
       <div>
         <label class="block text-sm font-medium text-gray-700">Fecha</label>
         <input type="date" name="dateTask" required
-               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
 
       <!-- Estado -->
       <div>
         <label class="block text-sm font-medium text-gray-700">Estado</label>
         <select name="taskStatus"
-                class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
           <?php foreach (TaskStatus::cases() as $estado): ?>
             <option value="<?= $estado->value ?>"><?= ucfirst($estado->value) ?></option>
           <?php endforeach; ?>
         </select>
       </div>
 
-       <!-- Etiqueta -->
-            <div class="mb-4">
-              <label for="tagId" class="block text-sm font-medium text-gray-700">Etiqueta</label>
-                <select id="tagId" name="tagId" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                    <option value="">Sin etiqueta</option>
-                        <?php foreach ($this->tags as $tag): ?>
-                     <option value="<?= $tag->id ?>"><?= htmlspecialchars($tag->nombre) ?></option>
-                    <?php endforeach; ?>
-               </select>
-           </div>
+      <!-- Etiqueta -->
+      <div class="mb-4">
+        <label for="tagId" class="block text-sm font-medium text-gray-700">Etiqueta</label>
+        <select id="tagId" name="tagId" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+          <option value="">Sin etiqueta</option>
+          <?php foreach ($this->tags as $tag): ?>
+            <option value="<?= $tag->id ?>"><?= htmlspecialchars($tag->nombre) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
 
-            <!-- Botón -->
-            <div class="flex justify-between items-center pt-4">
-                <a href="<?= BASE_URL ?>/userView"
-                    class="text-sm text-gray-600 hover:underline">⬅ Cancelar</a>
-                <button type="submit"
-                    class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow">
-                    💾 Guardar tarea
-                </button>
+      <!-- Botón -->
+      <div class="flex justify-between items-center pt-4">
+        <a href="<?= BASE_URL ?>/userView"
+          class="text-sm text-gray-600 hover:underline">⬅ Cancelar</a>
+        <button type="submit"
+          class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow">
+          💾 Guardar tarea
+        </button>
 
 
 
