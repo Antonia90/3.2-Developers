@@ -1,21 +1,7 @@
 <?php
-
 require_once __DIR__ . "/TagModel.php";
 require_once __DIR__ . '/../enums/taskEnums.php';
 require_once __DIR__ . '/../../config/constants.php';
-
-enum TaskStatus : string {
-    case PENDIENTE = "pendiente";
-    case ACABADA = "acabada";
-    case EMPEZADA = "empezada";
-}
-
-enum TaskTipe : string {
-    case REUNION = "reunion";
-    case REVISION = "revision";
-    case DESARROLLO = "desarrollo";
-    case FORMACION = "formacion";
-}
 
 class TaskModel {
     public int $idTask;
@@ -29,15 +15,18 @@ class TaskModel {
 
     const FILE_PATH = __DIR__ . "/../../lib/data/tasks.json";
 
-    public function __construct(array $data = []) {
-        $this->idTask = $data["idTask"];
-        $this->descriptionTask = $data["descriptionTask"];
-        $this->userTask = $data["userTask"];
-        $this->dateTask = new DateTime($data["dateTask"]);
-        $this->taskTipe = TaskTipe::from($data["taskTipe"]);
-        $this->taskStatus = TaskStatus::from($data["taskStatus"]);
-        $this->tagId = $data["tagId"] ?? null;
-    }
+  public function __construct(array $data = []) {
+    $this->idTask = $data["idTask"];
+    $this->descriptionTask = $data["descriptionTask"];
+    $this->userTask = $data["userTask"];
+    $this->dateTask = new DateTime($data["dateTask"]);
+
+    $this->taskTipe = array_key_exists("taskTipe", $data) ? TaskTipe::from($data["taskTipe"]) : TaskTipe::FORMACION;
+    $this->taskStatus = array_key_exists("taskStatus", $data) ? TaskStatus::from($data["taskStatus"]) : TaskStatus::PENDIENTE;
+
+    $this->tagId = array_key_exists("tagId", $data) && $data["tagId"] !== '' ? $data["tagId"] : null;
+}
+
 
     public function saveData(): void {
         $tasks = self::accesAllData();
@@ -67,7 +56,7 @@ class TaskModel {
         }
 
         $json = file_get_contents(self::FILE_PATH);
-        $data = json_decode($json, true);
+        $data = json_decode($json, true) ?? [];
         return array_map(fn($task) => new self($task), $data);
     }
 
@@ -124,18 +113,19 @@ class TaskModel {
         return (int)$id;
     }
 
-    public static function compareUser(): array {
-        $idUser = $_POST["username"] ?? null;
-        $userTask = [];
-        $tasks = self::accesAllData();
+   public static function compareUser(): array {
+    $idUser = $_SESSION["user"]["username"] ?? null;
+    $userTask = [];
+    $tasks = self::getAllWithTags(); //  CAMBIO: usa las tareas que ya traen el objeto `tag`
 
-        foreach ($tasks as $task) {
-            if ($idUser === $task->userTask) {
-                $userTask[] = $task;
-            }
+    foreach ($tasks as $task) {
+        if ($idUser === $task->userTask) {
+            $userTask[] = $task;
         }
-        return $userTask;
     }
+    return $userTask;
+}
+
 
     public static function getAllWithTags(): array {
         $tasks = self::accesAllData();
@@ -177,19 +167,3 @@ class TaskModel {
         return $userTaskTipe;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
- 
-

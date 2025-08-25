@@ -73,6 +73,8 @@ class UserController extends ApplicationController
         }
 
         $this->view->user = $_SESSION['user'];
+        $tasks = TaskModel::getAllWithTags(); // ✅ Esto sí trae etiquetas
+        $this->view->tasks = $tasks;
 
         $statusFilter = $_GET['status'] ?? null; //traemos el get de la pestaña
         $tipeFilter   = $_GET['tipe'] ?? null;
