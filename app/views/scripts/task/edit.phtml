@@ -1,4 +1,3 @@
-
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
 
   <div class="bg-white shadow-md rounded-lg p-8 max-w-xl w-full mt-16 mx-auto">
@@ -10,23 +9,15 @@
       <div>
         <label class="block text-sm font-medium text-gray-700">Descripción</label>
         <input type="text" name="descriptionTask"
-               value="<?= htmlspecialchars($this->task->descriptionTask) ?>" required
-               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          value="<?= htmlspecialchars($this->task->descriptionTask) ?>" required
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
-
-      <!-- Usuario 
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Usuario</label>
-        <input type="text" name="userTask"
-               value="<?= htmlspecialchars($this->task->userTask) ?>" required
-               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
-      </div>-->
 
       <!-- Tipo de tarea -->
       <div>
         <label class="block text-sm font-medium text-gray-700">Tipo de tarea</label>
         <select name="taskTipe"
-                class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
           <?php foreach (TaskTipe::cases() as $tipo): ?>
             <option value="<?= $tipo->value ?>" <?= $tipo === $this->task->taskTipe ? 'selected' : '' ?>>
               <?= ucfirst($tipo->value) ?>
@@ -39,15 +30,15 @@
       <div>
         <label class="block text-sm font-medium text-gray-700">Fecha</label>
         <input type="date" name="dateTask"
-               value="<?= $this->task->dateTask->format('Y-m-d') ?>" required
-               class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          value="<?= $this->task->dateTask->format('Y-m-d') ?>" required
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
       </div>
 
       <!-- Estado -->
       <div>
         <label class="block text-sm font-medium text-gray-700">Estado</label>
         <select name="taskStatus"
-                class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500">
           <?php foreach (TaskStatus::cases() as $estado): ?>
             <option value="<?= $estado->value ?>" <?= $estado === $this->task->taskStatus ? 'selected' : '' ?>>
               <?= ucfirst($estado->value) ?>
@@ -55,13 +46,23 @@
           <?php endforeach; ?>
         </select>
       </div>
+      <!-- Etiqueta -->
+      <select name="tagId" id="tagId" class="form-select mt-1 block w-full">
+        <option value="">-- Sin etiqueta --</option>
+        <?php foreach ($this->tags as $tag): ?>
+          <option value="<?= htmlspecialchars($tag->id) ?>"
+            <?= isset($this->task->tag) && $this->task->tag && $this->task->tag->id === $tag->id ? 'selected' : '' ?>>
+            <?= htmlspecialchars($tag->nombre) ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
 
       <!-- Botones -->
       <div class="flex justify-between items-center pt-4">
         <a href="<?= BASE_URL ?>/userView"
-           class="text-sm text-gray-600 hover:underline">⬅ Cancelar</a>
+          class="text-sm text-gray-600 hover:underline">⬅ Cancelar</a>
         <button type="submit"
-                class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow">
+          class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-2 rounded-md shadow">
           💾 Guardar cambios
         </button>
       </div>
@@ -69,4 +70,3 @@
   </div>
 
 </body>
-
