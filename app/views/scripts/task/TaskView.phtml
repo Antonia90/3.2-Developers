@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de tarea</title>
+</head>
+<body>
+    <h1>Detalle de la tarea</h1>
+    <?php
+    $tagName = "Sin etiqueta";
+ 
+?>
+<li><strong>Etiqueta:</strong> <?= htmlspecialchars($tagName) ?></li>
+
+    <ul>
+        <li><strong>ID:</strong> <?= $this->task->idTask ?></li>
+        <li><strong>Descripción:</strong> <?= htmlspecialchars($this->task->descriptionTask) ?></li>
+        <li><strong>Usuario:</strong> <?= htmlspecialchars($this->task->userTask) ?></li>
+        <li><strong>Tipo:</strong> <?= $this->task->taskTipe->value ?></li>
+        <li><strong>Fecha:</strong> <?= $this->task->dateTask->format('Y-m-d') ?></li>
+        <li><strong>Estado:</strong> <?= $this->task->taskStatus->value ?></li>
+    </ul>
+    <a href="<?= BASE_URL ?>/edit?id=<?= $this->task->idTask ?>">✏️ Editar</a> |
+    <a href="<?= BASE_URL ?>/delete?id=<?= $this->task->idTask ?>" onclick="return confirm('¿Eliminar tarea?')">🗑 Eliminar</a> |
+    <a href="<?= BASE_URL ?>/userView">⬅ Volver al listado</a>
+</body>
