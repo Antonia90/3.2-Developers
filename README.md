@@ -1,83 +1,47 @@
-# PHP initial Project
-Main structure of php project. Folders / files:
-- **app**
-  - **controllers**
-  - **models**
-  - **views**
-- **config**
-- **lib**
-  - **base**
-- **web**
+# Task Management App
 
-### Usage
+## Project Description
 
-The web/index.php is the heart of the system.
-This means that your web applications root folder is the “web” folder.
+A task management application using the MVC pattern with user login, filtering, and tagging features.
 
-All requests go through this file and it decides how the routing of the app
-should be.
-You can add additional hooks in this file to add certain routes.
+## Features
 
-### Project Structure
+* User authentication (login)
+* Task, user and tag creation, editing, and deletion
+* Task filtering (by status and type)
+* Task tagging for organization
 
-The root of the project holds a few directories:
-**/app** This is the folder where your magic will happen. Use the views, controllers and models folder for your app code.
-**/config** this folder holds a few configuration files. Currently only the connection to the database.
-**/lib** This is where you should put external libraries and other external files.
-**/lib/base** The library files. Don’t change these :)
-**/web** This folder holds files that are to be “downloaded” from your app. Stylesheets, javascripts and images used. (and more of course)
+## Architecture
 
-The system uses a basic MVC structure, with your web app’s files located in the
-“app” folder.
+Using the Model-View-Controller (MVC) pattern.
 
-#### app/controllers
-Your application’s controllers should be defined here.
+**app**
+**controllers**
+**models**
+**views**
+**config**
+**lib**
+**base**
+**web**
 
-All controller names should end with “Controller”. E.g. TestController.
-All controllers should inherit the library’s “Controller” class.
-However, you should generally just make an ApplicationController, which extends
-the Controller. Then you can defined beforeFilters etc in that, which will get run
-at every request.
+## Installation
 
-#### app/models
-Models handles database interaction etc.
+1. Clone the repository.
+2. Install dependencies (`npm install`)
+3. Configure environment variables
 
-All models should inherit from the Model class, which provides basic functionality.
-The Model class handles basic functionality such as:
+## Usage
 
-Setting up a database connection (using PDO)
-fetchOne(ID)
-save(array) → both update/create
-delete(ID)
-app/views
-Your view files.
-The structure is made so that having a controller named TestController, it looks
-in the app/views/test/ folder for it’s view files.
+1. Start the application
+2. Navigate to `http://localhost:8000` in your browser
+3. Logging in, creating a task, applying filters, or adding tags.
 
-All view files end with .phtml
-Having an action in the TestController called index, the view file
-app/views/test/index.phtml will be rendered as default.
+## Technologies Used
 
-#### config/routes.php
-Your routes around the system needs to be defined here.
-A route consists of the URL you want to call + the controller#action you want it
-to hit.
+* **Backend:** [PHP]
+* **Frontend:** [TailwindCSS]
+* **Database:** [JSON]
 
-An example is:
-$routes = array(
-‘/test’ => ‘test#index’ // this will hit the TestController’s indexAction method.
-);
+## License
 
-#### Error handling
-A general error handling has been added.
-
-If a route doesn’t exist, then the error controller is hit.
-If some other exception was thrown, the error controller is hit.
-As default, the error controller just shows the exception occured, so remember
-to style the error controller’s view file (app/views/error/error.phtml)
-
-
-### Utilities
-- [PHP Developers Guide](https://www.php.net/manual/en/index.php).
-- .gitignore file configuration. [See Official Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
-- Git branches. [See Official Docs](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell).
+This project is open-sourced licensed under the MIT License
